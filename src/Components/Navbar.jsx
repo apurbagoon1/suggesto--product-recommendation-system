@@ -7,14 +7,14 @@ const navItems = [
     { name: 'HOME', path: '/' },
     { name: 'ABOUT', path: '/about' },
     { name: 'QUERIES', path: '/queries' },
-    { name: 'RECOMMENDATION', path: '/recommendation' },
     { name: 'MY QUERIES', path: '/myQueries' },
-    { name: 'BLOGS', path: '/blogs' },
 ];
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [isRecommendationOpen, setIsRecommendationOpen] = useState(false);
+
 
     useEffect(() => {
         const handleScroll = () => {
@@ -33,35 +33,60 @@ const Navbar = () => {
             {/* Top Navbar */}
             <header
                 className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled
-                    ? 'bg-[#1f1f1f] bg-opacity-90 shadow-md backdrop-blur-md'
+                    ? 'backdrop-blur-md'
                     : 'bg-transparent'
                     }`}
             >
                 <div className="max-w-7xl mx-auto flex justify-between items-center px-6 md:px-8 lg:px-2 py-6">
                     {/* Logo */}
                     <Link to="/" className="flex items-center gap-2">
-                        <img src={logo} alt="Logo" className="h-10 md:h-12"/>
+                        <img src={logo} alt="Logo" className="h-10 md:h-12 lg:h-14" />
                         <div className="">
-                            <h1 className="text-xl md:text-2xl font-bold text-orange-500 tracking-wide">Suggesto</h1>
-                            <p className="text-xs md:text-sm font-light tracking-wider">PRODUCT RECOMMENDATION</p>
+                            <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-orange-500 tracking-wider mb-1 logo-text">Suggesto</h1>
+                            <p className="text-xs lg:text-sm font-extralight tracking-wider">PRODUCT RECO. SYSTEM</p>
                         </div>
                     </Link>
 
                     {/* Desktop Menu */}
-                    <nav className="hidden lg:flex items-center gap-6">
-                        {navItems.map(item => (
-                            <NavLink
-                                key={item.name}
-                                to={item.path}
-                                className={({ isActive }) =>
-                                    isActive
-                                        ? 'bg-gradient-to-tr from-orange-400 to-orange-700 text-gray-200 px-3 py-1 rounded'
-                                        : 'text-white hover:text-orange-500 font-semibold'
-                                }
-                            >
-                                {item.name}
-                            </NavLink>
-                        ))}
+                    <nav className="hidden lg:flex items-center gap-6 relative">
+                        {navItems
+                            .filter(item => item.name !== 'RECOMMENDATION')
+                            .map(item => (
+                                <NavLink
+                                    key={item.name}
+                                    to={item.path}
+                                    className={({ isActive }) =>
+                                        isActive
+                                            ? 'bg-gradient-to-tr from-yellow-600 to-orange-700 text-gray-200 px-3 py-1 rounded'
+                                            : 'text-white hover:text-orange-500 font-semibold'
+                                    }
+                                >
+                                    {item.name}
+                                </NavLink>
+                            ))}
+
+                        {/* Recommendation Dropdown */}
+                        <div className="relative group">
+                            <button className="text-white hover:text-orange-500 font-semibold px-3 py-1 rounded">
+                                RECOMMENDATION
+                            </button>
+
+                            {/* Dropdown Menu */}
+                            <div className="absolute top-full left-0 mt-1 w-56 bg-gray-900 shadow-lg rounded-md invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 z-50">
+                                <NavLink
+                                    to="/myRecommendations"
+                                    className="block px-4 py-2 text-white hover:bg-gray-700"
+                                >
+                                    My Recommendations
+                                </NavLink>
+                                <NavLink
+                                    to="/recommendationsForMe"
+                                    className="block px-4 py-2 text-white hover:bg-gray-700"
+                                >
+                                    Recommendations For Me
+                                </NavLink>
+                            </div>
+                        </div>
                     </nav>
 
                     <div className="hidden lg:flex gap-3 items-center">
@@ -75,7 +100,7 @@ const Navbar = () => {
 
                     {/* Mobile Menu Button */}
                     <button className="lg:hidden cursor-pointer" onClick={() => setIsSidebarOpen(true)}>
-                        <Menu size={30} className='text-orange-500'/>
+                        <Menu size={30} className='text-orange-500' />
                     </button>
                 </div>
             </header>
@@ -86,8 +111,8 @@ const Navbar = () => {
                     <Link to="/" className="text-center mx-auto space-y-2 mt-8">
                         <img src={logo} alt="Logo" className="h-10 mx-auto" />
                         <div>
-                            <h1 className="text-xl tracking-wide mb-2">Suggesto</h1>
-                            <p className="text-xs text-orange-500 font-light tracking-wider">PRODUCT RECOMMENDATION</p>
+                            <h1 className="text-xl tracking-wider mb-2 logo-text">Suggesto</h1>
+                            <p className="text-xs text-orange-500 font-extralight tracking-wider">PRODUCT RECOMMENDATION</p>
                         </div>
                     </Link>
 
@@ -107,19 +132,54 @@ const Navbar = () => {
                     </div>
 
                     <ul className="space-y-2 mt-4 text-left pl-2">
-                        {navItems.map(item => (
-                            <li key={item.name}>
-                                <NavLink
-                                    to={item.path}
-                                    onClick={() => setIsSidebarOpen(false)}
-                                    className={({ isActive }) =>
-                                        `block px-4 py-2 rounded hover:bg-gray-800 ${isActive ? 'text-orange-500 font-semibold text-sm' : 'text-white text-sm'}`
-                                    }
-                                >
-                                    {item.name}
-                                </NavLink>
-                            </li>
-                        ))}
+                        {navItems
+                            .filter(item => item.name !== 'RECOMMENDATION')
+                            .map(item => (
+                                <li key={item.name}>
+                                    <NavLink
+                                        to={item.path}
+                                        onClick={() => setIsSidebarOpen(false)}
+                                        className={({ isActive }) =>
+                                            `block px-4 py-2 rounded hover:bg-gray-800 ${isActive ? 'text-orange-500 font-semibold text-sm' : 'text-white text-sm'}`
+                                        }
+                                    >
+                                        {item.name}
+                                    </NavLink>
+                                </li>
+                            ))}
+
+                        <li>
+                            <div
+                                className="px-4 py-2 rounded text-white hover:bg-gray-800 cursor-pointer flex justify-between items-center"
+                                onClick={() => setIsRecommendationOpen(prev => !prev)}
+                            >
+                                <span>RECOMMENDATION</span>
+                                <span>{isRecommendationOpen ? '▲' : '▼'}</span>
+                            </div>
+
+                            {isRecommendationOpen && (
+                                <ul className="ml-4 mt-1">
+                                    <li>
+                                        <NavLink
+                                            to="/myRecommendations"
+                                            onClick={() => setIsSidebarOpen(false)}
+                                            className="block px-4 py-2 text-sm text-white hover:bg-gray-700"
+                                        >
+                                            My Recommendations
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink
+                                            to="/recommendationsForMe"
+                                            onClick={() => setIsSidebarOpen(false)}
+                                            className="block px-4 py-2 text-sm text-white hover:bg-gray-700"
+                                        >
+                                            Recommendations For Me
+                                        </NavLink>
+                                    </li>
+                                </ul>
+                            )}
+                        </li>
                     </ul>
                 </div>
             </div>

@@ -17,7 +17,7 @@ const Footer = () => {
                 <div className='md:mr-10'>
                     <Link to='/'>
                         <img src={logo} alt="Logo" className="h-10 mb-2" />
-                        <h2 className="text-xl font-bold text-orange-500 mb-2">Suggesto</h2>
+                        <h2 className="text-xl font-bold text-orange-500 mb-2 logo-text">Suggesto</h2>
                     </Link>
 
                     <p className="text-sm leading-relaxed mt-3">
@@ -52,7 +52,7 @@ const Footer = () => {
             <div className="border-t border-base-300 pt-6 pb-10 px-10 md:px-24 flex flex-col md:flex-row items-center justify-between gap-6">
                 <aside className="text-center md:text-left">
                     <p className="text-sm">
-                        © {new Date().getFullYear()} <span className="font-bold text-orange-500">Suggesto</span>. All rights reserved.
+                        © {new Date().getFullYear()} <span className="font-bold text-orange-500 logo-text">Suggesto</span>. All rights reserved.
                     </p>
                 </aside>
                 <nav className="flex gap-4">
