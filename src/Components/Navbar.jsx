@@ -57,7 +57,8 @@ const Navbar = () => {
                     {/* Desktop Menu */}
                     <nav className="hidden lg:flex items-center gap-6 relative">
                         {navItems
-                            .filter(item => item.name !== 'RECOMMENDATION')
+                            .filter(item => user || (item.name !== 'MY QUERIES')) // hide MY QUERIES if not logged in
+                            .filter(item => item.name !== 'RECOMMENDATION') // RECOMMENDATION handled separately below
                             .map(item => (
                                 <NavLink
                                     key={item.name}
@@ -73,29 +74,30 @@ const Navbar = () => {
                                 </NavLink>
                             ))}
 
-                        {/* Recommendation Dropdown */}
-                        <div className="relative group">
-                            <button className="text-white hover:text-orange-500 font-semibold px-3 py-1 rounded">
-                                RECOMMENDATION
-                            </button>
-
-                            {/* Dropdown Menu */}
-                            <div className="absolute top-full left-0 mt-1 w-56 bg-gray-900 shadow-lg rounded-md invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 z-50">
-                                <NavLink
-                                    to="/myRecommendations"
-                                    className="block px-4 py-2 text-white hover:bg-gray-700"
-                                >
-                                    My Recommendations
-                                </NavLink>
-                                <NavLink
-                                    to="/recommendationsForMe"
-                                    className="block px-4 py-2 text-white hover:bg-gray-700"
-                                >
-                                    Recommendations For Me
-                                </NavLink>
+                        {/* Recommendation Dropdown - Only show when user is logged in */}
+                        {user && (
+                            <div className="relative group">
+                                <button className="text-white hover:text-orange-500 font-semibold px-3 py-1 rounded">
+                                    RECOMMENDATION
+                                </button>
+                                <div className="absolute top-full left-0 mt-1 w-56 bg-gray-900 shadow-lg rounded-md invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 z-50">
+                                    <NavLink
+                                        to="/myRecommendations"
+                                        className="block px-4 py-2 text-white hover:bg-gray-700"
+                                    >
+                                        My Recommendations
+                                    </NavLink>
+                                    <NavLink
+                                        to="/recommendationsForMe"
+                                        className="block px-4 py-2 text-white hover:bg-gray-700"
+                                    >
+                                        Recommendations For Me
+                                    </NavLink>
+                                </div>
                             </div>
-                        </div>
+                        )}
                     </nav>
+
 
                     <div className="hidden lg:flex gap-3 items-center">
                         {user ? (
@@ -169,6 +171,7 @@ const Navbar = () => {
 
                     <ul className="space-y-2 mt-4 text-left pl-2">
                         {navItems
+                            .filter(item => user || (item.name !== 'MY QUERIES'))
                             .filter(item => item.name !== 'RECOMMENDATION')
                             .map(item => (
                                 <li key={item.name}>
@@ -184,38 +187,40 @@ const Navbar = () => {
                                 </li>
                             ))}
 
-                        <li>
-                            <div
-                                className="px-4 py-2 rounded text-white hover:bg-gray-800 cursor-pointer flex justify-between items-center"
-                                onClick={() => setIsRecommendationOpen(prev => !prev)}
-                            >
-                                <span>RECOMMENDATION</span>
-                                <span>{isRecommendationOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}</span>
-                            </div>
+                        {user && (
+                            <li>
+                                <div
+                                    className="px-4 py-2 rounded text-white hover:bg-gray-800 cursor-pointer flex justify-between items-center"
+                                    onClick={() => setIsRecommendationOpen(prev => !prev)}
+                                >
+                                    <span>RECOMMENDATION</span>
+                                    <span>{isRecommendationOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}</span>
+                                </div>
 
-                            {isRecommendationOpen && (
-                                <ul className="ml-4 mt-1">
-                                    <li>
-                                        <NavLink
-                                            to="/myRecommendations"
-                                            onClick={() => setIsSidebarOpen(false)}
-                                            className="block px-4 py-2 text-sm text-white hover:bg-gray-700"
-                                        >
-                                            My Recommendations
-                                        </NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink
-                                            to="/recommendationsForMe"
-                                            onClick={() => setIsSidebarOpen(false)}
-                                            className="block px-4 py-2 text-sm text-white hover:bg-gray-700"
-                                        >
-                                            Recommendations For Me
-                                        </NavLink>
-                                    </li>
-                                </ul>
-                            )}
-                        </li>
+                                {isRecommendationOpen && (
+                                    <ul className="ml-4 mt-1">
+                                        <li>
+                                            <NavLink
+                                                to="/myRecommendations"
+                                                onClick={() => setIsSidebarOpen(false)}
+                                                className="block px-4 py-2 text-sm text-white hover:bg-gray-700"
+                                            >
+                                                My Recommendations
+                                            </NavLink>
+                                        </li>
+                                        <li>
+                                            <NavLink
+                                                to="/recommendationsForMe"
+                                                onClick={() => setIsSidebarOpen(false)}
+                                                className="block px-4 py-2 text-sm text-white hover:bg-gray-700"
+                                            >
+                                                Recommendations For Me
+                                            </NavLink>
+                                        </li>
+                                    </ul>
+                                )}
+                            </li>
+                        )}
                     </ul>
                 </div>
             </div>

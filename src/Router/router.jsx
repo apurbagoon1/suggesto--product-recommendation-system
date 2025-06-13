@@ -3,6 +3,7 @@ import {
 } from "react-router";
 import HomeLayout from "../Layouts/HomeLayout";
 import Home from "../Pages/Home";
+import AddQuery from "../Pages/AddQuery";
 
 const router = createBrowserRouter([
     {
@@ -12,6 +13,10 @@ const router = createBrowserRouter([
             {
                 index: true,
                 Component: Home
+            },
+            {
+                path: 'addQuery',
+                Component: AddQuery
             }
         ]
     },
