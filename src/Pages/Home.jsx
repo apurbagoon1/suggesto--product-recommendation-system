@@ -2,6 +2,7 @@ import React from 'react';
 import Slider from '../Components/Slider';
 import { useLoaderData, useNavigate } from 'react-router';
 import Query from './Query';
+import WhyBoycott from '../Components/WhyBoycott';
 
 const Home = () => {
     const queries = useLoaderData();
@@ -11,7 +12,7 @@ const Home = () => {
         <div>
             <Slider></Slider>
             <div className="max-w-7xl mx-auto px-4 py-10 md:py-12 lg:py-16 text-center">
-                <h1 className="text-2xl md:text-4xl font-bold text-orange-500 mb-4 logo-text tracking-wide">
+                <h1 className="text-2xl md:text-4xl font-bold text-orange-500 mb-4 pacifico-regular tracking-wide">
                     Explore Recent Queries
                 </h1>
                 <p className="md:text-xl mb-10 tracking-wider">
@@ -30,6 +31,7 @@ const Home = () => {
                     View All Plants
                 </button>
             </div>
+            <WhyBoycott></WhyBoycott>
         </div>
     );
 };

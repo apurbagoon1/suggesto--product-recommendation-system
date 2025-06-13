@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Smart Choices",
+    "image": "https://i.ibb.co/WTfHnVx/boycott-1.jpg",
+    "tooltip": "Empower users to make informed decisions based on community insights and real experiences."
+  },
+  {
+    "name": "Community Power",
+    "image": "https://i.ibb.co/q3fTNs5N/boycott-2.jpg",
+    "tooltip": "Let user queries and recommendations amplify collective voices for better products."
+  },
+  {
+    "name": "Boycott Awareness",
+    "image": "https://i.ibb.co/q3m1jpbC/boycott-3.jpg",
+    "tooltip": "Highlight unethical products and drive meaningful consumer action through shared reasons."
+  },
+  {
+    "name": "Trust & Transparency",
+    "image": "https://i.ibb.co/8n1YbNrz/boycott-4.jpg",
+    "tooltip": "Foster a trusted space where users can share honest reviews and alternatives."
+  },
+  {
+    "name": "Product Justice",
+    "image": "https://i.ibb.co/2YysHcFp/boycott-5.jpg",
+    "tooltip": "Expose and discuss products that violate ethics, sustainability, or fairness."
+  }
+]
