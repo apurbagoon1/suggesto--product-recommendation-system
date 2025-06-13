@@ -3,6 +3,7 @@ import Slider from '../Components/Slider';
 import { useLoaderData, useNavigate } from 'react-router';
 import Query from './Query';
 import WhyBoycott from '../Components/WhyBoycott';
+import TrustedAlternatives from '../Components/TrustedAlternatives';
 
 const Home = () => {
     const queries = useLoaderData();
@@ -32,6 +33,7 @@ const Home = () => {
                 </button>
             </div>
             <WhyBoycott></WhyBoycott>
+            <TrustedAlternatives></TrustedAlternatives>
         </div>
     );
 };
