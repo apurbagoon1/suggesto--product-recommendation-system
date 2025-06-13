@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, NavLink } from 'react-router';
-import { Menu, X, Search, User, ArrowLeft } from 'lucide-react';
+import { Menu, X, Search, User, ArrowLeft, ChevronUp, ChevronDown } from 'lucide-react';
 import logo from '../assets/idea.png';
+import AuthModal from './AuthModal';
+import ProfileModal from './ProfileModal';
+import { AuthContext } from '../provider/AuthProvider';
 
 const navItems = [
     { name: 'HOME', path: '/' },
@@ -11,9 +14,13 @@ const navItems = [
 ];
 
 const Navbar = () => {
+    const { user } = useContext(AuthContext);
+    const [showProfileModal, setShowProfileModal] = useState(false);
+
     const [isScrolled, setIsScrolled] = useState(false);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [isRecommendationOpen, setIsRecommendationOpen] = useState(false);
+    const [showAuthModal, setShowAuthModal] = useState(false);
 
 
     useEffect(() => {
@@ -43,7 +50,7 @@ const Navbar = () => {
                         <img src={logo} alt="Logo" className="h-10 md:h-12 lg:h-14" />
                         <div className="">
                             <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-orange-500 tracking-wider mb-1 logo-text">Suggesto</h1>
-                            <p className="text-xs lg:text-sm font-extralight tracking-wider">PRODUCT RECO. SYSTEM</p>
+                            <p className="text-xs lg:text-sm font-extralight tracking-wider opacity-65">PRODUCT RECO. SYSTEM</p>
                         </div>
                     </Link>
 
@@ -56,9 +63,10 @@ const Navbar = () => {
                                     key={item.name}
                                     to={item.path}
                                     className={({ isActive }) =>
-                                        isActive
-                                            ? 'bg-gradient-to-tr from-yellow-600 to-orange-700 text-gray-200 px-3 py-1 rounded'
-                                            : 'text-white hover:text-orange-500 font-semibold'
+                                        `relative p-3 font-semibold ${isActive
+                                            ? 'text-gray-200 after:content-[""] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[3px] after:bg-gradient-to-r after:from-yellow-600 after:via-orange-600 after:to-orange-700'
+                                            : 'text-white hover:text-orange-500'
+                                        }`
                                     }
                                 >
                                     {item.name}
@@ -90,13 +98,23 @@ const Navbar = () => {
                     </nav>
 
                     <div className="hidden lg:flex gap-3 items-center">
-                        <button className="rounded-full border-2 border-orange-500 p-2 hover:bg-orange-500 cursor-pointer">
-                            <User className="text-white text-2xl" size={20} />
-                        </button>
-                        <button className="rounded-full border-2 border-orange-500 p-2 hover:bg-orange-500 cursor-pointer">
-                            <Search className="text-white" size={20} />
-                        </button>
+                        {user ? (
+                            <button
+                                onClick={() => setShowProfileModal(true)}
+                                className="border-2 border-orange-500 px-4 py-1.5 rounded-lg cursor-pointer uppercase tracking-wide font-medium hover:bg-gradient-to-tr from-yellow-600 to-orange-700 text-white"
+                                title={`Click to see ${user.displayName}'s profile`}
+                            >
+                                Profile
+                            </button>
+                        ) : (
+                            <div className="hidden lg:block">
+                                <button onClick={() => setShowAuthModal(true)} className="border-2 border-orange-500 px-4 py-1.5 rounded-lg cursor-pointer uppercase tracking-wide font-medium hover:bg-gradient-to-tr from-yellow-600 to-orange-700 ">
+                                    Log In
+                                </button>
+                            </div>
+                        )}
                     </div>
+
 
                     {/* Mobile Menu Button */}
                     <button className="lg:hidden cursor-pointer" onClick={() => setIsSidebarOpen(true)}>
@@ -107,19 +125,37 @@ const Navbar = () => {
 
             {/* Sidebar for Mobile */}
             <div className={`fixed top-0 left-0 h-full w-72 bg-black z-50 transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out lg:hidden`}>
-                <div className="flex justify-between px-4 py-6">
+                <button onClick={() => setIsSidebarOpen(false)} className='pt-3 pl-3'>
+                    <ArrowLeft size={25} className="text-orange-500 hover:text-black hover:bg-orange-500 text-2xl rounded-full cursor-pointer" />
+                </button>
+                <div className="flex justify-between px-4 mb-4">
                     <Link to="/" className="text-center mx-auto space-y-2 mt-8">
-                        <img src={logo} alt="Logo" className="h-10 mx-auto" />
+                        <img src={logo} alt="Logo" className="h-12 mx-auto" />
                         <div>
                             <h1 className="text-xl tracking-wider mb-2 logo-text">Suggesto</h1>
                             <p className="text-xs text-orange-500 font-extralight tracking-wider">PRODUCT RECOMMENDATION</p>
                         </div>
                     </Link>
-
-                    <button onClick={() => setIsSidebarOpen(false)}>
-                        <ArrowLeft size={25} className="text-orange-500 relative -top-14 cursor-pointer" />
-                    </button>
                 </div>
+
+                {user ? (
+                    <div className="flex justify-center mb-4">
+                        <button
+                            onClick={() => setShowProfileModal(true)}
+                            className="border-2 border-orange-500 px-4 py-1.5 rounded-lg cursor-pointer  tracking-wider font-medium hover:bg-gradient-to-tr from-yellow-600 to-orange-700 text-white"
+                            title={`Click to see ${user.displayName}'s profile`}
+                        >
+                            Profile
+                        </button>
+                    </div>
+                ) : (
+                    <div
+                        className="flex justify-center gap-2 text-orange-500 font-medium mb-4 tracking-wide cursor-pointer"
+                        onClick={() => setShowAuthModal(true)}
+                    >
+                        <span>Log In</span><span>|</span><span>Sign Up</span>
+                    </div>
+                )}
 
                 <div className="px-4">
                     <div className="relative mb-4">
@@ -154,7 +190,7 @@ const Navbar = () => {
                                 onClick={() => setIsRecommendationOpen(prev => !prev)}
                             >
                                 <span>RECOMMENDATION</span>
-                                <span>{isRecommendationOpen ? '▲' : '▼'}</span>
+                                <span>{isRecommendationOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}</span>
                             </div>
 
                             {isRecommendationOpen && (
@@ -183,6 +219,9 @@ const Navbar = () => {
                     </ul>
                 </div>
             </div>
+            <AuthModal isOpen={showAuthModal} onClose={() => setShowAuthModal(false)} />
+
+            <ProfileModal isOpen={showProfileModal} onClose={() => setShowProfileModal(false)} user={user} />
         </>
     );
 };

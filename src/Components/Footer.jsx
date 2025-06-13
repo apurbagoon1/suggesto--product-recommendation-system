@@ -29,8 +29,8 @@ const Footer = () => {
                     <h6 className="footer-title mb-2">Navigation</h6>
                     <NavLink to="/" className="link link-hover block">Home</NavLink>
                     <NavLink to="/queries" className="link link-hover block">Queries</NavLink>
-                    <NavLink to="/recommendation" className="link link-hover block">Recommendation</NavLink>
                     <NavLink to="/myQueries" className="link link-hover block">My Queries</NavLink>
+                    <NavLink to="/recommendation" className="link link-hover block">Recommendation</NavLink>
                 </div>
 
                 <div className='space-y-1'>
