@@ -57,8 +57,8 @@ const Navbar = () => {
                     {/* Desktop Menu */}
                     <nav className="hidden lg:flex items-center gap-6 relative">
                         {navItems
-                            .filter(item => user || (item.name !== 'MY QUERIES')) // hide MY QUERIES if not logged in
-                            .filter(item => item.name !== 'RECOMMENDATION') // RECOMMENDATION handled separately below
+                            .filter(item => user || (item.name !== 'MY QUERIES')) 
+                            .filter(item => item.name !== 'RECOMMENDATION') 
                             .map(item => (
                                 <NavLink
                                     key={item.name}
@@ -74,7 +74,6 @@ const Navbar = () => {
                                 </NavLink>
                             ))}
 
-                        {/* Recommendation Dropdown - Only show when user is logged in */}
                         {user && (
                             <div className="relative group">
                                 <button className="text-white hover:text-orange-500 font-semibold px-3 py-1 rounded">
