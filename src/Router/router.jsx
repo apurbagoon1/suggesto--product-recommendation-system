@@ -6,6 +6,7 @@ import Home from "../Pages/Home";
 import AddQuery from "../Pages/AddQuery";
 import MyQueries from "../Pages/MyQueries";
 import PrivateRoute from "../provider/PrivateRoute";
+import QueryDetails from "../Pages/QueryDetails";
 
 const router = createBrowserRouter([
     {
@@ -27,6 +28,12 @@ const router = createBrowserRouter([
                 path: 'myQueries',
                 element: <PrivateRoute>
                     <MyQueries></MyQueries>
+                </PrivateRoute>
+            },
+            {
+                path: 'queryDetails/:id',
+                element: <PrivateRoute>
+                    <QueryDetails></QueryDetails>
                 </PrivateRoute>
             }
         ]

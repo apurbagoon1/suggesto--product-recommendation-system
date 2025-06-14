@@ -112,11 +112,13 @@ const MyQueries = () => {
                                         >
                                             <MdEdit /> Update
                                         </button>
-                                        <button
-                                            className="text-white rounded-2xl hover:bg-blue-600 shadow-xl flex items-center justify-center gap-1 cursor-pointer hover:scale-105 transition-transform border-2 border-orange-500 px-4 py-1.5 tracking-wide font-medium hover:bg-gradient-to-tr from-yellow-600 to-orange-700 "
-                                        >
-                                            <IoIosEye /> View
-                                        </button>
+                                        <Link to={`/queryDetails/${query._id}`}>
+                                            <button
+                                                className="text-white rounded-2xl hover:bg-blue-600 shadow-xl flex items-center justify-center gap-1 cursor-pointer hover:scale-105 transition-transform border-2 border-orange-500 px-4 py-1.5 tracking-wide font-medium hover:bg-gradient-to-tr from-yellow-600 to-orange-700 "
+                                            >
+                                                <IoIosEye /> View
+                                            </button>
+                                        </Link>
                                         <button
                                             className="tracking-wide font-medium px-5 py-2 bg-gradient-to-r from-yellow-500 to-orange-700 text-white rounded-2xl hover:bg-red-600 shadow-xl flex items-center justify-center gap-1 cursor-pointer hover:scale-105 transition-transform"
                                         >
@@ -130,7 +132,6 @@ const MyQueries = () => {
                 )}
             </div>
         </div>
-
     );
 };
 
