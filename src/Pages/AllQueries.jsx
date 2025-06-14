@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { IoIosHeart } from 'react-icons/io';
+import { FaThLarge, FaList } from 'react-icons/fa';
 import Loading from './Loading';
 import Cover from '../Components/Cover';
 
 const AllQueries = () => {
     const [queries, setQueries] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [isGridView, setIsGridView] = useState(true); // Toggle between grid and list
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -14,21 +16,16 @@ const AllQueries = () => {
             try {
                 const res = await fetch('http://localhost:5000/queries');
                 const data = await res.json();
-                const sortedQueries = data.sort((a, b) => new Date(b.date) - new Date(a.date));
-                setQueries(sortedQueries);
+                const sorted = data.sort((a, b) => new Date(b.date) - new Date(a.date));
+                setQueries(sorted);
                 setLoading(false);
             } catch (err) {
-                console.error('Error fetching all queries:', err);
+                console.error('Error fetching queries:', err);
                 setLoading(false);
             }
         };
-
         fetchQueries();
     }, []);
-
-    const handleRecommendClick = (id) => {
-        navigate(`/queryDetails/${id}`);
-    };
 
     const formatTimeAgo = (date) => {
         const now = new Date();
@@ -52,47 +49,54 @@ const AllQueries = () => {
         return 'Added just now';
     };
 
+    const handleRecommendClick = (id) => {
+        navigate(`/queryDetails/${id}`);
+    };
+
     if (loading) return <Loading />;
 
     return (
         <div>
             <Cover title="Explore Others' Thoughts" highlighted="ALL QUERIES" current="All Queries" />
             <div className="max-w-7xl mx-auto px-4 py-10">
-                <h2 className="text-3xl md:text-4xl font-bold text-orange-500 mb-10 pacifico-regular text-center">
-                    Browse Public Concerns
-                </h2>
+                <div className="flex justify-end mb-6">
+                    <button
+                        onClick={() => setIsGridView(!isGridView)}
+                        className="text-white bg-gradient-to-tr from-yellow-500 to-orange-600 px-4 py-2 rounded-full flex items-center gap-2 shadow hover:opacity-85 transition cursor-pointer"
+                    >
+                        {isGridView ? <FaList /> : <FaThLarge />}
+                        {isGridView ? 'List View' : 'Grid View'}
+                    </button>
+                </div>
 
-                <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className={isGridView ? 'grid sm:grid-cols-2 lg:grid-cols-3 gap-8' : 'space-y-6'}>
                     {queries.map((query) => (
                         <div
                             key={query._id}
-                            className="bg-white shadow-md rounded-xl overflow-hidden hover:shadow-lg hover:scale-[1.02] transition flex flex-col"
+                            className={`bg-white shadow rounded-lg p-5 transition hover:shadow-lg ${isGridView ? 'flex flex-col h-full' : 'flex flex-row gap-5 items-center'
+                                }`}
                         >
                             <img
                                 src={query.ProductImage}
                                 alt={query.ProductName}
-                                className="w-full h-60 object-cover"
+                                className={`object-cover rounded ${isGridView ? 'w-full h-60' : 'w-52 h-52'}`}
                             />
-                            <div className="p-5 space-y-2 flex flex-col flex-1">
-                                <h3 className="text-xl font-bold text-orange-500 text-center">
-                                    {query.QueryTitle}
-                                </h3>
-                                <p className="text-sm text-gray-600 italic text-center">{formatTimeAgo(query.date)}</p>
-                                <p className="text-gray-700 text-sm mb-3 text-justify">{query.BoycottReason.slice(0, 100)}...</p>
-
-                                <div className="text-gray-700">
+                            <div className={`flex-1 flex flex-col ${isGridView ? 'space-y-2' : 'space-y-2'}`}>
+                                <h2 className={`text-xl font-bold text-orange-500 ${isGridView ? 'mt-3' : ''}`}>{query.QueryTitle}</h2>
+                                <p className={`text-sm italic text-gray-500 ${isGridView ? 'text-center' : ''}`}>{formatTimeAgo(query.date)}</p>
+                                <p className="text-gray-700 text-sm">{query.BoycottReason.slice(0, 100)}...</p>
+                                <div className="text-gray-700 text-sm mt-1 mb-3">
                                     <p><strong>Product:</strong> {query.ProductName}</p>
                                     <p><strong>Brand:</strong> {query.ProductBrand}</p>
                                     <p><strong>By:</strong> {query.userName}</p>
                                 </div>
-
-                                <div className="mt-auto pt-4 flex justify-between items-center">
-                                    <p className="text-sm font-semibold text-orange-600">
-                                        {query.recommendationCount || 0} Recommendation{query.recommendationCount > 1 ? 's' : ''}
+                                <div className="flex justify-between items-center mt-auto pt-3 border-t border-orange-200">
+                                    <p className="text-orange-600 font-semibold text-sm">
+                                        {query.recommendationCount || 0} Recommend{query.recommendationCount !== 1 ? 's' : ''}
                                     </p>
                                     <button
                                         onClick={() => handleRecommendClick(query._id)}
-                                        className="flex items-center gap-2 bg-gradient-to-r from-yellow-500 to-orange-600 text-white px-4 py-2 rounded-full text-sm font-semibold shadow hover:scale-105 transition cursor-pointer"
+                                        className="flex items-center gap-2 bg-gradient-to-r from-yellow-500 to-orange-600 text-white px-4 py-2 rounded-full text-sm font-semibold hover:scale-105 transition cursor-pointer"
                                     >
                                         <IoIosHeart /> Recommend
                                     </button>
