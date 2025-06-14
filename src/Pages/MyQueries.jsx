@@ -5,7 +5,6 @@ import { AuthContext } from '../provider/AuthProvider';
 import { Link } from 'react-router';
 import Swal from 'sweetalert2';
 import EmptyBox from '../assets/box.png'
-import { FaLeaf, FaUserCircle, FaTint, FaHeartbeat, FaCalendarAlt, FaCalendarCheck, FaRecycle } from 'react-icons/fa';
 import { MdDelete, MdEdit } from 'react-icons/md';
 import Loading from './Loading';
 import { IoIosEye } from 'react-icons/io';
@@ -36,6 +35,34 @@ const MyQueries = () => {
 
         fetchUserQueries();
     }, [user]);
+
+    const handleDelete = async (id) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this query!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    const res = await fetch(`http://localhost:5000/queries/${id}`, {
+                        method: 'DELETE',
+                    });
+                    const data = await res.json();
+                    if (data.deletedCount === 1 || data.message === "Query deleted successfully.") {
+                        Swal.fire('Deleted!', 'Your query has been deleted.', 'success');
+                        setQueries(prev => prev.filter(query => query._id !== id));
+                    } else {
+                        Swal.fire('Not Found!', 'Query could not be found.', 'error');
+                    }
+                } catch {
+                    Swal.fire('Error!', 'Something went wrong.', 'error');
+                }
+            }
+        });
+    };
+
 
     if (loading) return <Loading></Loading>;
 
@@ -83,7 +110,7 @@ const MyQueries = () => {
                         {queries.map((query) => (
                             <div
                                 key={query._id}
-                                className="bg-white/80 shadow-md rounded-xl overflow-hidden hover:shadow-lg transition flex flex-col flex-1"
+                                className="bg-white/80 shadow-md rounded-xl overflow-hidden hover:shadow-lg hover:scale-105 transition flex flex-col flex-1"
                             >
                                 <img
                                     src={query.ProductImage}
@@ -120,6 +147,7 @@ const MyQueries = () => {
                                             </button>
                                         </Link>
                                         <button
+                                            onClick={() => handleDelete(query._id)}
                                             className="tracking-wide font-medium px-5 py-2 bg-gradient-to-r from-yellow-500 to-orange-700 text-white rounded-2xl hover:bg-red-600 shadow-xl flex items-center justify-center gap-1 cursor-pointer hover:scale-105 transition-transform"
                                         >
                                             <MdDelete /> Delete
