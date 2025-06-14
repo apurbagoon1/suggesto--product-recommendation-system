@@ -16,9 +16,9 @@ const WhyBoycott = () => {
   }, []);
 
   return (
-    <section className="py-8 md:py-12 lg:py-16 px-4 bg-gradient-to-r from-orange-300 to-orange-500 via-orange-400">
+    <section className="py-8 md:py-12 lg:py-16 px-4 bg-gradient-to-r from-orange-400 to-orange-400 via-orange-300">
       <div className="max-w-6xl mx-auto text-center">
-        <h2 className="text-2xl md:text-4xl font-bold text-red-600 mb-4 pacifico-regular tracking-wide">Why Boycott Matters!</h2>
+        <h2 className="text-2xl md:text-4xl font-bold text-red-500 mb-4 pacifico-regular tracking-wide">Why Boycott Matters!</h2>
         <p className="md:text-xl mb-8 tracking-wider">Hover to Learn how your choices can drive ethical change in industries worldwide.</p>
 
         <div className="relative overflow-visible">
@@ -63,7 +63,7 @@ const WhyBoycott = () => {
                     className="w-full h-60 object-cover rounded"
                     onError={(e) => (e.target.style.display = 'none')}
                   />
-                  <h3 className="mt-4 text-xl font-semibold text-orange-400">{boycott.name}</h3>
+                  <h3 className="mt-4 text-xl font-semibold text-orange-500">{boycott.name}</h3>
                 </div>
               </SwiperSlide>
             ))}

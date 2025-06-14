@@ -109,7 +109,7 @@ const Navbar = () => {
                             </button>
                         ) : (
                             <div className="hidden lg:block">
-                                <button onClick={() => setShowAuthModal(true)} className="border-2 border-orange-500 px-4 py-1.5 rounded-lg cursor-pointer uppercase tracking-wide font-medium hover:bg-gradient-to-tr from-yellow-600 to-orange-700 ">
+                                <button onClick={() => setShowAuthModal(true)} className="border-2 border-orange-500 px-4 py-1.5 rounded-lg cursor-pointer uppercase tracking-wide font-medium hover:bg-gradient-to-tr from-yellow-600 to-orange-700">
                                     Log In
                                 </button>
                             </div>

@@ -26,10 +26,10 @@ const Home = () => {
                     ))}
                 </div>
                 <button
-                    onClick={() => navigate('/allPlants')}
-                    className="mt-12 px-8 py-3 text-sm md:text-base hover:bg-gradient-to-bl from-yellow-500 to-orange-500 hover:text-white uppercase tracking-wider font-bold rounded-3xl hover:scale-105 transition-transform cursor-pointer"
+                    onClick={() => navigate('/allQueries')}
+                    className="mt-12 px-6 py-3 text-sm md:text-base hover:bg-gradient-to-bl from-yellow-500 to-orange-500 hover:text-white uppercase tracking-wider font-bold rounded-full hover:scale-105 transition-transform cursor-pointer"
                 >
-                    View All Plants
+                    View All Queries
                 </button>
             </div>
             <WhyBoycott></WhyBoycott>
