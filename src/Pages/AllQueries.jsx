@@ -8,8 +8,9 @@ import Cover from '../Components/Cover';
 const AllQueries = () => {
     const [queries, setQueries] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [isGridView, setIsGridView] = useState(true); // Toggle between grid and list
+    const [isGridView, setIsGridView] = useState(true);
     const navigate = useNavigate();
+    const [searchText, setSearchText] = useState('');
 
     useEffect(() => {
         const fetchQueries = async () => {
@@ -26,6 +27,10 @@ const AllQueries = () => {
         };
         fetchQueries();
     }, []);
+
+    const filteredQueries = queries.filter(query =>
+        query.ProductName.toLowerCase().includes(searchText)
+    );
 
     const formatTimeAgo = (date) => {
         const now = new Date();
@@ -59,18 +64,33 @@ const AllQueries = () => {
         <div>
             <Cover title="Explore Others' Thoughts" highlighted="ALL QUERIES" current="All Queries" />
             <div className="max-w-7xl mx-auto px-4 py-10">
-                <div className="flex justify-end mb-6">
-                    <button
-                        onClick={() => setIsGridView(!isGridView)}
-                        className="text-white bg-gradient-to-tr from-yellow-500 to-orange-600 px-4 py-2 rounded-full flex items-center gap-2 shadow hover:opacity-85 transition cursor-pointer"
-                    >
-                        {isGridView ? <FaList /> : <FaThLarge />}
-                        {isGridView ? 'List View' : 'Grid View'}
-                    </button>
+                <div className="flex justify-between items-center mb-8 gap-6 flex-wrap">
+                    <input
+                        type="text"
+                        placeholder="Search by Product Name..."
+                        className="px-3 py-2 rounded-md border border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-400 flex-1"
+                        value={searchText}
+                        onChange={(e) => setSearchText(e.target.value.toLowerCase())}
+                    />
+
+                    <div className="flex gap-3">
+                        <button
+                            onClick={() => setIsGridView(true)}
+                            className={`px-3 py-2 rounded ${isGridView ? 'bg-gradient-to-tr from-yellow-500 to-orange-600 text-white' : 'bg-gray-200 text-black cursor-pointer'}`}
+                        >
+                            <FaThLarge size={20} />
+                        </button>
+                        <button
+                            onClick={() => setIsGridView(false)}
+                            className={`px-3 py-2 rounded ${!isGridView ? 'bg-gradient-to-tr from-yellow-500 to-orange-600 text-white' : 'bg-gray-200 text-black cursor-pointer'}`}
+                        >
+                            <FaList size={20}/>
+                        </button>
+                    </div>
                 </div>
 
                 <div className={isGridView ? 'grid sm:grid-cols-2 lg:grid-cols-3 gap-8' : 'space-y-6'}>
-                    {queries.map((query) => (
+                    {filteredQueries.map((query) => (
                         <div
                             key={query._id}
                             className={`bg-white shadow rounded-lg p-5 transition hover:shadow-lg ${isGridView ? 'flex flex-col h-full' : 'flex flex-row gap-5 items-center'
