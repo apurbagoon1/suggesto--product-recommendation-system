@@ -24,17 +24,41 @@ const MyQueries = () => {
             try {
                 const res = await fetch(`http://localhost:5000/queries`);
                 const data = await res.json();
-                const userQueries = data.filter(query => query?.email === user?.email);
+                const userQueries = data
+                    .filter(query => query?.email === user?.email)
+                    .sort((a, b) => new Date(b.date) - new Date(a.date));
                 setQueries(userQueries);
                 setLoading(false);
             } catch (error) {
-                console.error("Error fetching qureies:", error);
+                console.error("Error fetching queries:", error);
                 setLoading(false);
             }
         };
 
         fetchUserQueries();
     }, [user]);
+
+    const formatTimeAgo = (date) => {
+        const now = new Date();
+        const posted = new Date(date);
+        const seconds = Math.floor((now - posted) / 1000);
+
+        const intervals = {
+            year: 31536000,
+            month: 2592000,
+            week: 604800,
+            day: 86400,
+            hour: 3600,
+            minute: 60,
+        };
+
+        for (const key in intervals) {
+            const value = Math.floor(seconds / intervals[key]);
+            if (value >= 1) return `Added ${value} ${key}${value > 1 ? 's' : ''} ago`;
+        }
+
+        return 'Added just now';
+    };
 
     const handleDelete = async (id) => {
         Swal.fire({
@@ -63,9 +87,8 @@ const MyQueries = () => {
         });
     };
 
-
     if (loading) return <Loading></Loading>;
-
+  
     return (
         <div>
             <Cover title="Your Product Concerns" highlighted="MY QUERIES" current="My Queries" />
@@ -110,7 +133,7 @@ const MyQueries = () => {
                         {queries.map((query) => (
                             <div
                                 key={query._id}
-                                className="bg-white/80 shadow-md rounded-xl overflow-hidden hover:shadow-lg hover:scale-105 transition flex flex-col flex-1"
+                                className="bg-white/80 shadow-md rounded-xl overflow-hidden hover:shadow-lg hover:scale-[1.02] transition flex flex-col flex-1"
                             >
                                 <img
                                     src={query.ProductImage}
@@ -131,17 +154,21 @@ const MyQueries = () => {
                                         <p className="flex items-center gap-2">
                                             <span className="font-semibold">Brand:</span> {query.ProductBrand}
                                         </p>
+                                        <p className="text-sm text-gray-500 mt-2 italic text-right">
+                                            {formatTimeAgo(query.date)}
+                                        </p>
                                     </div>
 
-                                    <div className="mt-auto flex justify-between pt-3 px-1.5">
+                                    <div className="mt-auto flex justify-between pt-3">
                                         <button
+                                            onClick={() => navigate(`/updateQuery/${query._id}`)}
                                             className="tracking-wide font-medium px-5 py-2 bg-gradient-to-r from-yellow-500 to-orange-700 text-white rounded-2xl hover:bg-red-600 shadow-xl flex items-center justify-center gap-1 cursor-pointer hover:scale-105 transition-transform"
                                         >
                                             <MdEdit /> Update
                                         </button>
                                         <Link to={`/queryDetails/${query._id}`}>
                                             <button
-                                                className="text-white rounded-2xl hover:bg-blue-600 shadow-xl flex items-center justify-center gap-1 cursor-pointer hover:scale-105 transition-transform border-2 border-orange-500 px-4 py-1.5 tracking-wide font-medium hover:bg-gradient-to-tr from-yellow-600 to-orange-700 "
+                                                className="text-white rounded-2xl hover:bg-blue-600 shadow-xl flex items-center justify-center gap-1 cursor-pointer hover:scale-105 transition-transform border-2 border-orange-500 px-5 py-1.5 tracking-wide font-medium hover:bg-gradient-to-tr from-yellow-600 to-orange-700 "
                                             >
                                                 <IoIosEye /> View
                                             </button>
