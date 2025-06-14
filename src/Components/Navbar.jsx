@@ -9,7 +9,7 @@ import { AuthContext } from '../provider/AuthProvider';
 const navItems = [
     { name: 'HOME', path: '/' },
     { name: 'ABOUT', path: '/about' },
-    { name: 'QUERIES', path: '/queries' },
+    { name: 'QUERIES', path: '/allQueries' },
     { name: 'MY QUERIES', path: '/myQueries' },
 ];
 

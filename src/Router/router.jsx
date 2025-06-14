@@ -8,6 +8,7 @@ import MyQueries from "../Pages/MyQueries";
 import PrivateRoute from "../provider/PrivateRoute";
 import QueryDetails from "../Pages/QueryDetails";
 import UpdateQuery from "../Pages/UpdateQuery";
+import AllQueries from "../Pages/AllQueries";
 
 const router = createBrowserRouter([
     {
@@ -18,6 +19,11 @@ const router = createBrowserRouter([
                 index: true,
                 loader: () => fetch('http://localhost:5000/queries'),
                 Component: Home
+            },
+            {   
+                path: '/allQueries',
+                Component: AllQueries
+
             },
             {
                 path: 'addQuery',

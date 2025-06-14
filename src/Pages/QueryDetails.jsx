@@ -31,13 +31,13 @@ const QueryDetails = () => {
     return (
         <div>
             <Cover title="Your Query Insights" highlighted="QUERY DETAILS" current="Query Details" />
-            <div className="max-w-6xl mx-auto px-4 py-10">
+            <div className="max-w-5xl mx-auto px-4 py-10">
                 <div className="text-center mt-4 mb-8">
                     <h1 className="text-2xl md:text-3xl font-bold text-orange-500 mb-2 pacifico-regular tracking-wide">Details of {query.ProductName}</h1>
                     <p className="md:text-xl tracking-wider">Get a deeper look into the concerns, reasons, and recommendations for this product.</p>
                 </div>
                 <div className="bg-gradient-to-r from-orange-300 via-orange-200 to-orange-300 shadow-lg rounded p-4">
-                    <img src={query.ProductImage} alt={query.ProductName} className="w-full rounded object-cover" />
+                    <img src={query.ProductImage} alt={query.ProductName} className="w-full rounded md:h-[70vh] object-cover" />
                     <div className='space-y-5 p-6'>
                         <h2 className="text-3xl font-bold text-orange-500">{query.QueryTitle}</h2>
                         <p className="text-lg text-gray-800 leading-relaxed">
