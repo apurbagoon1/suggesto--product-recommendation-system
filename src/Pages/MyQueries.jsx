@@ -168,7 +168,7 @@ const MyQueries = () => {
                                         </button>
                                         <Link to={`/queryDetails/${query._id}`}>
                                             <button
-                                                className="text-white rounded-2xl hover:bg-blue-600 shadow-xl flex items-center justify-center gap-1 cursor-pointer hover:scale-105 transition-transform border-2 border-orange-500 px-5 py-1.5 tracking-wide font-medium hover:bg-gradient-to-tr from-yellow-600 to-orange-700 "
+                                                className="text-orange-500 hover:text-white rounded-2xl shadow-xl flex items-center justify-center gap-1 cursor-pointer hover:scale-105 transition-transform border-2 border-orange-500 px-5 py-1.5 tracking-wide font-medium hover:bg-gradient-to-tr from-yellow-600 to-orange-700 "
                                             >
                                                 <IoIosEye /> View
                                             </button>

@@ -99,7 +99,7 @@ const AllQueries = () => {
                             <img
                                 src={query.ProductImage}
                                 alt={query.ProductName}
-                                className={`object-cover rounded ${isGridView ? 'w-full h-60' : 'w-52 h-52'}`}
+                                className={`object-cover rounded ${isGridView ? 'w-full h-60' : 'w-40 h-40 sm:w-52 sm:h-52'}`}
                             />
                             <div className={`flex-1 flex flex-col ${isGridView ? 'space-y-2' : 'space-y-2'}`}>
                                 <h2 className={`text-xl font-bold text-orange-500 ${isGridView ? 'mt-3' : ''}`}>{query.QueryTitle}</h2>
