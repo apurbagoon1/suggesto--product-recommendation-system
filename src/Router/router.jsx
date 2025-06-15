@@ -9,6 +9,7 @@ import PrivateRoute from "../provider/PrivateRoute";
 import QueryDetails from "../Pages/QueryDetails";
 import UpdateQuery from "../Pages/UpdateQuery";
 import AllQueries from "../Pages/AllQueries";
+import MyRecommendation from "../Pages/MyRecommendation";
 
 const router = createBrowserRouter([
     {
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
                 loader: () => fetch('http://localhost:5000/queries'),
                 Component: Home
             },
-            {   
+            {
                 path: '/allQueries',
                 Component: AllQueries
 
@@ -47,6 +48,12 @@ const router = createBrowserRouter([
                 path: 'updateQuery/:id',
                 element: <PrivateRoute>
                     <UpdateQuery></UpdateQuery>
+                </PrivateRoute>
+            },
+            {
+                path: 'myRecommendations',
+                element: <PrivateRoute>
+                    <MyRecommendation></MyRecommendation>
                 </PrivateRoute>
             }
         ]

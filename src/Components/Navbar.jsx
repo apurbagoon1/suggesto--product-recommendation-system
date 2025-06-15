@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link, NavLink } from 'react-router';
+import { Link, NavLink, useLocation } from 'react-router';
 import { Menu, X, Search, User, ArrowLeft, ChevronUp, ChevronDown } from 'lucide-react';
 import logo from '../assets/idea.png';
 import AuthModal from './AuthModal';
@@ -21,6 +21,10 @@ const Navbar = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [isRecommendationOpen, setIsRecommendationOpen] = useState(false);
     const [showAuthModal, setShowAuthModal] = useState(false);
+
+    const location = useLocation();
+    const currentPath = location.pathname;
+
 
 
     useEffect(() => {
@@ -57,8 +61,8 @@ const Navbar = () => {
                     {/* Desktop Menu */}
                     <nav className="hidden lg:flex items-center gap-6 relative">
                         {navItems
-                            .filter(item => user || (item.name !== 'MY QUERIES')) 
-                            .filter(item => item.name !== 'RECOMMENDATION') 
+                            .filter(item => user || (item.name !== 'MY QUERIES'))
+                            .filter(item => item.name !== 'RECOMMENDATION')
                             .map(item => (
                                 <NavLink
                                     key={item.name}
@@ -76,27 +80,44 @@ const Navbar = () => {
 
                         {user && (
                             <div className="relative group">
-                                <button className="text-white hover:text-orange-500 font-semibold px-3 py-1 rounded">
-                                    RECOMMENDATION
-                                </button>
+                                <span
+                                    className={`relative font-semibold p-3 rounded ${currentPath === '/myRecommendations' || currentPath === '/recommendationsForMe'
+                                        ? 'text-gray-200 after:content-[""] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[3px] after:bg-gradient-to-r after:from-yellow-600 after:via-orange-600 after:to-orange-700'
+                                        : 'text-white hover:text-orange-500'
+                                        }`}
+                                >
+                                    {currentPath === '/myRecommendations'
+                                        ? 'MY RECOMMENDATIONS'
+                                        : currentPath === '/recommendationsForMe'
+                                            ? 'RECOMMENDATIONS FOR ME'
+                                            : 'RECOMMENDATION'}
+                                </span>
+
                                 <div className="absolute top-full left-0 mt-1 w-56 bg-gray-900 shadow-lg rounded-md invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 z-50">
                                     <NavLink
                                         to="/myRecommendations"
-                                        className="block px-4 py-2 text-white hover:bg-gray-700"
+                                        onClick={() => setIsSidebarOpen(false)}
+                                        className={({ isActive }) =>
+                                            `block px-4 py-2 text-sm rounded ${isActive ? 'bg-gray-700 text-orange-400 font-semibold' : 'text-white hover:bg-gray-700'}`
+                                        }
                                     >
                                         My Recommendations
                                     </NavLink>
                                     <NavLink
                                         to="/recommendationsForMe"
-                                        className="block px-4 py-2 text-white hover:bg-gray-700"
+                                        onClick={() => setIsSidebarOpen(false)}
+                                        className={({ isActive }) =>
+                                            `block px-4 py-2 text-sm rounded ${isActive ? 'bg-gray-700 text-orange-400 font-semibold' : 'text-white hover:bg-gray-700'}`
+                                        }
                                     >
                                         Recommendations For Me
                                     </NavLink>
+
                                 </div>
                             </div>
                         )}
-                    </nav>
 
+                    </nav>
 
                     <div className="hidden lg:flex gap-3 items-center">
                         {user ? (
@@ -202,7 +223,12 @@ const Navbar = () => {
                                             <NavLink
                                                 to="/myRecommendations"
                                                 onClick={() => setIsSidebarOpen(false)}
-                                                className="block px-4 py-2 text-sm text-white hover:bg-gray-700"
+                                                className={({ isActive }) =>
+                                                    `block px-4 py-2 text-sm rounded ${isActive
+                                                        ? 'text-orange-500 bg-gray-800 font-semibold'
+                                                        : 'text-white hover:bg-gray-700'
+                                                    }`
+                                                }
                                             >
                                                 My Recommendations
                                             </NavLink>
@@ -211,7 +237,12 @@ const Navbar = () => {
                                             <NavLink
                                                 to="/recommendationsForMe"
                                                 onClick={() => setIsSidebarOpen(false)}
-                                                className="block px-4 py-2 text-sm text-white hover:bg-gray-700"
+                                                className={({ isActive }) =>
+                                                    `block px-4 py-2 text-sm rounded ${isActive
+                                                        ? 'text-orange-500 bg-gray-800 font-semibold'
+                                                        : 'text-white hover:bg-gray-700'
+                                                    }`
+                                                }
                                             >
                                                 Recommendations For Me
                                             </NavLink>
@@ -219,6 +250,7 @@ const Navbar = () => {
                                     </ul>
                                 )}
                             </li>
+
                         )}
                     </ul>
                 </div>
