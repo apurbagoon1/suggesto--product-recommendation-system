@@ -13,19 +13,28 @@ const MyRecommendation = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        if (user?.email) {
-            fetch(`http://localhost:5000/recommendations?email=${user.email}`)
-                .then(res => res.json())
-                .then(data => {
+        if (!user?.email) return;
+
+        fetch(`http://localhost:5000/recommendations?email=${user.email}`, {
+            credentials: 'include' 
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (Array.isArray(data)) {
                     setMyRecommendations(data);
-                    setLoading(false);
-                })
-                .catch(err => {
-                    console.error("Error fetching recommendations:", err);
-                    setLoading(false);
-                });
-        }
+                } else {
+                    console.error("Unexpected data format:", data);
+                    setMyRecommendations([]); 
+                }
+                setLoading(false);
+            })
+            .catch(error => {
+                console.error("Error fetching recommendations:", error);
+                setLoading(false);
+            });
     }, [user?.email]);
+
+
 
     const handleDelete = async (recommendationId, queryId) => {
         const confirm = await Swal.fire({
@@ -41,13 +50,15 @@ const MyRecommendation = () => {
         if (confirm.isConfirmed) {
             try {
                 const res = await fetch(`http://localhost:5000/recommendations/${recommendationId}`, {
-                    method: 'DELETE'
+                    method: 'DELETE',
+                    credentials: 'include',
                 });
 
                 const result = await res.json();
                 if (result.deletedCount === 1) {
                     await fetch(`http://localhost:5000/queries/decrement/${queryId}`, {
-                        method: 'PATCH'
+                        method: 'PATCH',
+                        credentials: 'include'
                     });
 
                     setMyRecommendations(prev => prev.filter(r => r._id !== recommendationId));

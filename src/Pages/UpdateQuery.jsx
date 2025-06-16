@@ -9,7 +9,9 @@ const UpdateQuery = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(`http://localhost:5000/queries/${id}`)
+        fetch(`http://localhost:5000/queries/${id}`, {
+            credentials: 'include',
+        })
             .then((res) => res.json())
             .then((data) => setQuery(data));
     }, [id]);
@@ -29,6 +31,7 @@ const UpdateQuery = () => {
         const res = await fetch(`http://localhost:5000/queries/${id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
             body: JSON.stringify(updatedQuery),
         });
 

@@ -39,7 +39,9 @@ const QueryDetails = () => {
     useEffect(() => {
         const fetchRecommendations = async () => {
             try {
-                const res = await fetch(`http://localhost:5000/recommendations/${id}`);
+                const res = await fetch(`http://localhost:5000/recommendations/${id}`,{
+                    credentials: 'include',
+                });
                 const data = await res.json();
                 setRecommendations(data);
             } catch (error) {
@@ -77,13 +79,15 @@ const QueryDetails = () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
+                credentials: 'include',
                 body: JSON.stringify(recommendationData)
             });
 
             const data = await res.json();
             if (data.insertedId) {
                 await fetch(`http://localhost:5000/queries/${query._id}/recommend`, {
-                    method: 'PATCH'
+                    method: 'PATCH',
+                    credentials: 'include',
                 });
                 Swal.fire('Success', 'Recommendation added.', 'success');
                 setRecommendations(prev => [...prev, recommendationData]);

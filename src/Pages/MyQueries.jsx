@@ -22,7 +22,9 @@ const MyQueries = () => {
     useEffect(() => {
         const fetchUserQueries = async () => {
             try {
-                const res = await fetch(`http://localhost:5000/queries`);
+                const res = await fetch(`http://localhost:5000/queries`, {
+                    credentials: 'include'
+                });
                 const data = await res.json();
                 const userQueries = data
                     .filter(query => query?.email === user?.email)
@@ -72,6 +74,7 @@ const MyQueries = () => {
                 try {
                     const res = await fetch(`http://localhost:5000/queries/${id}`, {
                         method: 'DELETE',
+                        credentials: 'include',
                     });
                     const data = await res.json();
                     if (data.deletedCount === 1 || data.message === "Query deleted successfully.") {
@@ -88,7 +91,7 @@ const MyQueries = () => {
     };
 
     if (loading) return <Loading></Loading>;
-  
+
     return (
         <div>
             <Cover title="Your Product Concerns" highlighted="MY QUERIES" current="My Queries" />

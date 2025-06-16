@@ -1,70 +1,105 @@
 import React, { createContext, useEffect, useRef, useState } from 'react';
 import app from '../firebase/firebase.config';
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut
+} from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import Swal from 'sweetalert2';
+import axios from 'axios'; 
+
 export const AuthContext = createContext();
 
 const googleProvider = new GoogleAuthProvider();
 const auth = getAuth(app);
+
 const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
-    const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-    const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-    const hasShownModalAlert = useRef(false);
+  const hasShownModalAlert = useRef(false);
 
-    const logIn = (email, password) => {
-        setLoading(true)
-        return signInWithEmailAndPassword(auth, email, password)
-    };
+  const logIn = async (email, password) => {
+    setLoading(true);
+    try {
+      const result = await signInWithEmailAndPassword(auth, email, password);
+      await axios.post(
+        'http://localhost:5000/jwt',
+        { email },
+        { withCredentials: true } 
+      );
+      return result;
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    const googleSignIn = () => {
-        setLoading(true);
-        return signInWithPopup(auth, googleProvider);
-    };
+  const googleSignIn = async () => {
+    setLoading(true);
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      const email = result.user.email;
+      await axios.post(
+        'http://localhost:5000/jwt',
+        { email },
+        { withCredentials: true }
+      );
+      return result;
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    const createUser = (email, password) => {
-        setLoading(true)
-        return createUserWithEmailAndPassword(auth, email, password)
-    };
+  const createUser = (email, password) => {
+    setLoading(true);
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
 
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
-            setLoading(false);
-        });
-        return () => {
-            unsubscribe();
-        }
-    }, []);
+  const logOut = async () => {
+    setLoading(true);
+    try {
+      await axios.get('http://localhost:5000/logout', { withCredentials: true }); 
+      return signOut(auth);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    useEffect(() => {
-        if (isAuthModalOpen && !hasShownModalAlert.current) {
-            Swal.fire("Oops!", "Please log in to access this page.", "error");
-            hasShownModalAlert.current = true;
-        }
-        if (!isAuthModalOpen) {
-            hasShownModalAlert.current = false;
-        }
-    }, [isAuthModalOpen]);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setLoading(false);
+    });
+    return () => unsubscribe();
+  }, []);
 
-    const authData = {
-        user,
-        setUser,
-        createUser,
-        logIn,
-        loading,
-        googleSignIn,
-        isAuthModalOpen,
-        setIsAuthModalOpen
-    };
+  useEffect(() => {
+    if (isAuthModalOpen && !hasShownModalAlert.current) {
+      Swal.fire('Oops!', 'Please log in to access this page.', 'error');
+      hasShownModalAlert.current = true;
+    }
+    if (!isAuthModalOpen) {
+      hasShownModalAlert.current = false;
+    }
+  }, [isAuthModalOpen]);
 
-    return (
-        <AuthContext.Provider value={authData}>
-            {children}
-        </AuthContext.Provider>
-    );
+  const authData = {
+    user,
+    setUser,
+    createUser,
+    logIn,
+    logOut,
+    loading,
+    googleSignIn,
+    isAuthModalOpen,
+    setIsAuthModalOpen
+  };
+
+  return <AuthContext.Provider value={authData}>{children}</AuthContext.Provider>;
 };
 
 export default AuthProvider;

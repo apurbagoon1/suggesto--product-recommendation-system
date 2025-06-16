@@ -52,6 +52,7 @@ const AddQuery = () => {
             headers: {
                 'content-type': 'application/json'
             },
+            credentials: 'include',
             body: JSON.stringify(newQuery)
         })
             .then(res => res.json())

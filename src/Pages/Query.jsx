@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router';
 import { FaUser } from 'react-icons/fa';
 
-
 const Query = ({ query }) => {
     const {
         _id,

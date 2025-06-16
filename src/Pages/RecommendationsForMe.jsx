@@ -10,19 +10,36 @@ const RecommendationsForMe = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (user?.email) {
-      fetch(`http://localhost:5000/recommendationsMe?email=${user.email.toLowerCase()}`)
-        .then((res) => res.json())
-        .then((data) => {
+    const fetchRecommendations = async () => {
+      if (!user?.email) return;
+
+      try {
+        const res = await fetch(
+          `http://localhost:5000/recommendationsMe?email=${user.email.toLowerCase()}`,
+          {
+            credentials: 'include', 
+          }
+        );
+
+        const data = await res.json();
+
+        if (Array.isArray(data)) {
           setRecommendations(data);
-          setLoading(false);
-        })
-        .catch((err) => {
-          console.error('Error fetching recommendations:', err);
-          setLoading(false);
-        });
-    }
+        } else {
+          console.error("Unexpected data format:", data);
+          setRecommendations([]);
+        }
+      } catch (err) {
+        console.error("Error fetching recommendations:", err);
+        setRecommendations([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRecommendations();
   }, [user?.email]);
+
 
   if (loading) return <Loading />;
 
