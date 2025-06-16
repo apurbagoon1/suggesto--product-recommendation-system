@@ -5,6 +5,7 @@ import { AuthContext } from '../provider/AuthProvider';
 import { FaTrash } from 'react-icons/fa';
 import Loading from './Loading';
 import Cover from '../Components/Cover';
+import NoReco from '../assets/no-reco.png'
 
 const MyRecommendation = () => {
     const { user } = useContext(AuthContext);
@@ -69,9 +70,19 @@ const MyRecommendation = () => {
             <Cover title="Your Suggestions Hub" highlighted="MY RECOMMENDATIONS" current="My Recommendations" />
 
             <div className="max-w-7xl mx-auto px-4 py-10">
-                <h1 className="text-2xl md:text-4xl pacifico-regular text-center font-bold text-orange-500 my-6">My Recommendations</h1>
+                <h1 className="text-2xl md:text-4xl pacifico-regular text-center font-bold text-orange-500 my-6">Recommendations You Gave</h1>
+
                 {myRecommendations.length === 0 ? (
-                    <p className="text-center md:text-lg text-gray-500">You haven't made any recommendations yet.</p>
+                    <div className="flex flex-col items-center justify-center py-10">
+                        <img
+                            src={NoReco}
+                            alt="No recommendations"
+                            className="w-44 mb-6"
+                        />
+                        <p className="text-center opacity-80 text-lg md:text-xl">
+                            You haven't made any recommendations yet!
+                        </p>
+                    </div>
                 ) : (
                     <div className="overflow-x-auto rounded shadow my-8">
                         <table className="min-w-full border border-orange-500 text-sm">
