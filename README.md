@@ -70,14 +70,13 @@ This project is built using **React**, **Firebase Auth**, **Express.js**, and **
 - **Framer Motion**
 - **Lottie React**
 - **React Icons**
-- **React Toastify**
 - **React Tooltip**
 - **SwiperJS Carousel**
 
 ### Server
 - **Express.js**
-- **MongoDB (with Mongoose)**
-- **JWT (jsonwebtoken)**
+- **MongoDB**
+- **JWT**
 - **CORS**
 - **Dotenv**
 - **Cookie Parser**
@@ -99,7 +98,6 @@ react-dom
 react-icons
 react-responsive-carousel
 react-router
-react-toastify
 react-tooltip
 sweetalert2
 swiper
