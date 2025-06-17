@@ -28,7 +28,7 @@ const AuthProvider = ({ children }) => {
     try {
       const result = await signInWithEmailAndPassword(auth, email, password);
       await axios.post(
-        'http://localhost:5000/jwt',
+        'https://suggesto-product-reco-server.vercel.app/jwt',
         { email },
         { withCredentials: true } 
       );
@@ -44,7 +44,7 @@ const AuthProvider = ({ children }) => {
       const result = await signInWithPopup(auth, googleProvider);
       const email = result.user.email;
       await axios.post(
-        'http://localhost:5000/jwt',
+        'https://suggesto-product-reco-server.vercel.app/jwt',
         { email },
         { withCredentials: true }
       );
@@ -62,7 +62,8 @@ const AuthProvider = ({ children }) => {
   const logOut = async () => {
     setLoading(true);
     try {
-      await axios.get('http://localhost:5000/logout', { withCredentials: true }); 
+      await axios.post('https://suggesto-product-reco-server.vercel.app/logout', null, { withCredentials: true });
+ 
       return signOut(auth);
     } finally {
       setLoading(false);

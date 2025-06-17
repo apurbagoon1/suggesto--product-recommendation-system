@@ -19,7 +19,7 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                loader: () => fetch('http://localhost:5000/queries'),
+                loader: () => fetch('https://suggesto-product-reco-server.vercel.app/queries'),
                 Component: Home
             },
             {

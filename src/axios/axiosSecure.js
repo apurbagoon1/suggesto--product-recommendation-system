@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const axiosSecure = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: 'https://suggesto-product-reco-server.vercel.app',
   withCredentials: true, // 👈 automatically sends cookies
 });
 

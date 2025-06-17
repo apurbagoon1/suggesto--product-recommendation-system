@@ -22,7 +22,7 @@ const MyQueries = () => {
     useEffect(() => {
         const fetchUserQueries = async () => {
             try {
-                const res = await fetch(`http://localhost:5000/queries`, {
+                const res = await fetch(`https://suggesto-product-reco-server.vercel.app/queries`, {
                     credentials: 'include'
                 });
                 const data = await res.json();
@@ -72,7 +72,7 @@ const MyQueries = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    const res = await fetch(`http://localhost:5000/queries/${id}`, {
+                    const res = await fetch(`https://suggesto-product-reco-server.vercel.app/queries/${id}`, {
                         method: 'DELETE',
                         credentials: 'include',
                     });

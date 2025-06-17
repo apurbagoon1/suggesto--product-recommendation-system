@@ -15,9 +15,9 @@ const RecommendationsForMe = () => {
 
       try {
         const res = await fetch(
-          `http://localhost:5000/recommendationsMe?email=${user.email.toLowerCase()}`,
+          `https://suggesto-product-reco-server.vercel.app/recommendationsMe?email=${user.email.toLowerCase()}`,
           {
-            credentials: 'include', 
+            credentials: 'include',
           }
         );
 

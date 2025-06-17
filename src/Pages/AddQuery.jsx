@@ -47,7 +47,7 @@ const AddQuery = () => {
         newQuery.date = new Date().toISOString();
         newQuery.recommendationCount = 0;
 
-        fetch('http://localhost:5000/queries', {
+        fetch('https://suggesto-product-reco-server.vercel.app/queries', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

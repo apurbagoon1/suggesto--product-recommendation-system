@@ -22,7 +22,7 @@ const QueryDetails = () => {
     useEffect(() => {
         const fetchQuery = async () => {
             try {
-                const res = await fetch(`http://localhost:5000/queries`);
+                const res = await fetch(`https://suggesto-product-reco-server.vercel.app/queries`);
                 const data = await res.json();
                 const found = data.find(q => q._id === id);
                 setQuery(found);
@@ -39,7 +39,7 @@ const QueryDetails = () => {
     useEffect(() => {
         const fetchRecommendations = async () => {
             try {
-                const res = await fetch(`http://localhost:5000/recommendations/${id}`,{
+                const res = await fetch(`https://suggesto-product-reco-server.vercel.app/recommendations/${id}`, {
                     credentials: 'include',
                 });
                 const data = await res.json();
@@ -74,7 +74,7 @@ const QueryDetails = () => {
         };
 
         try {
-            const res = await fetch('http://localhost:5000/recommendations', {
+            const res = await fetch('https://suggesto-product-reco-server.vercel.app/recommendations', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -85,7 +85,7 @@ const QueryDetails = () => {
 
             const data = await res.json();
             if (data.insertedId) {
-                await fetch(`http://localhost:5000/queries/${query._id}/recommend`, {
+                await fetch(`https://suggesto-product-reco-server.vercel.app/queries/${query._id}/recommend`, {
                     method: 'PATCH',
                     credentials: 'include',
                 });

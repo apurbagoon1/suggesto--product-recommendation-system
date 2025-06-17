@@ -15,8 +15,8 @@ const MyRecommendation = () => {
     useEffect(() => {
         if (!user?.email) return;
 
-        fetch(`http://localhost:5000/recommendations?email=${user.email}`, {
-            credentials: 'include' 
+        fetch(`https://suggesto-product-reco-server.vercel.app/recommendations?email=${user.email}`, {
+            credentials: 'include'
         })
             .then(res => res.json())
             .then(data => {
@@ -24,7 +24,7 @@ const MyRecommendation = () => {
                     setMyRecommendations(data);
                 } else {
                     console.error("Unexpected data format:", data);
-                    setMyRecommendations([]); 
+                    setMyRecommendations([]);
                 }
                 setLoading(false);
             })
@@ -49,14 +49,14 @@ const MyRecommendation = () => {
 
         if (confirm.isConfirmed) {
             try {
-                const res = await fetch(`http://localhost:5000/recommendations/${recommendationId}`, {
+                const res = await fetch(`https://suggesto-product-reco-server.vercel.app/recommendations/${recommendationId}`, {
                     method: 'DELETE',
                     credentials: 'include',
                 });
 
                 const result = await res.json();
                 if (result.deletedCount === 1) {
-                    await fetch(`http://localhost:5000/queries/decrement/${queryId}`, {
+                    await fetch(`https://suggesto-product-reco-server.vercel.app/queries/decrement/${queryId}`, {
                         method: 'PATCH',
                         credentials: 'include'
                     });

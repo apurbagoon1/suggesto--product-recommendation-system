@@ -9,7 +9,7 @@ const UpdateQuery = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(`http://localhost:5000/queries/${id}`, {
+        fetch(`https://suggesto-product-reco-server.vercel.app/queries/${id}`, {
             credentials: 'include',
         })
             .then((res) => res.json())
@@ -28,7 +28,7 @@ const UpdateQuery = () => {
             BoycottReason: form.BoycottReason.value,
         };
 
-        const res = await fetch(`http://localhost:5000/queries/${id}`, {
+        const res = await fetch(`https://suggesto-product-reco-server.vercel.app/queries/${id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',

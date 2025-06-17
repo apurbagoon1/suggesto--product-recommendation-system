@@ -15,7 +15,7 @@ const AllQueries = () => {
     useEffect(() => {
         const fetchQueries = async () => {
             try {
-                const res = await fetch('http://localhost:5000/queries');
+                const res = await fetch('https://suggesto-product-reco-server.vercel.app/queries');
                 const data = await res.json();
                 const sorted = data.sort((a, b) => new Date(b.date) - new Date(a.date));
                 setQueries(sorted);
@@ -84,7 +84,7 @@ const AllQueries = () => {
                             onClick={() => setIsGridView(false)}
                             className={`px-3 py-2 rounded ${!isGridView ? 'bg-gradient-to-tr from-yellow-500 to-orange-600 text-white' : 'bg-gray-200 text-black cursor-pointer'}`}
                         >
-                            <FaList size={20}/>
+                            <FaList size={20} />
                         </button>
                     </div>
                 </div>
