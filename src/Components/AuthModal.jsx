@@ -3,7 +3,6 @@ import { X, Mail, Lock, User, Image } from 'lucide-react';
 import { FcGoogle } from "react-icons/fc";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import Swal from 'sweetalert2';
-import PlantBg from '../assets/Plant.jpg';
 import logo from '../assets/idea.png';
 import { AuthContext } from '../provider/AuthProvider';
 import { updateProfile } from "firebase/auth";
