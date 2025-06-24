@@ -9,7 +9,7 @@ import {
 } from 'firebase/auth';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import Swal from 'sweetalert2';
-import axios from 'axios'; 
+import axios from 'axios';
 
 export const AuthContext = createContext();
 
@@ -30,7 +30,7 @@ const AuthProvider = ({ children }) => {
       await axios.post(
         'https://suggesto-product-reco-server.vercel.app/jwt',
         { email },
-        { withCredentials: true } 
+        { withCredentials: true }
       );
       return result;
     } finally {
@@ -54,16 +54,22 @@ const AuthProvider = ({ children }) => {
     }
   };
 
-  const createUser = (email, password) => {
+  const createUser = async (email, password) => {
     setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password);
+    try {
+      const result = await createUserWithEmailAndPassword(auth, email, password);
+      await logIn(email, password);
+      return result;
+    } finally {
+      setLoading(false);
+    }
   };
 
   const logOut = async () => {
     setLoading(true);
     try {
       await axios.post('https://suggesto-product-reco-server.vercel.app/logout', null, { withCredentials: true });
- 
+
       return signOut(auth);
     } finally {
       setLoading(false);

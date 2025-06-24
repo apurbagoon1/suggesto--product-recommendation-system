@@ -17,10 +17,6 @@ const AddQuery = () => {
         }
     }, [user]);
 
-    useEffect(() => {
-        document.title = 'Suggesto | Add Query';
-    }, []);
-
     const handleAddQuery = e => {
         e.preventDefault();
         const form = e.target;
