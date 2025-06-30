@@ -38,6 +38,15 @@ const Query = ({ query }) => {
                 <div className="text-sm text-gray-500 flex items-center justify-center gap-2">
                     <FaUser /> Added by {userName}
                 </div>
+
+                <div className="pt-3">
+                    <Link
+                        to={`/queryDetails/${_id}`}
+                        className="inline-block text-center w-full bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-3 py-1.5 rounded-3xl font-medium tracking-wide hover:opacity-80"
+                    >
+                        Query Details
+                    </Link>
+                </div>
             </div>
         </div>
     );

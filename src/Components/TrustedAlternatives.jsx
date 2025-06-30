@@ -33,7 +33,7 @@ const TrustedAlternatives = () => {
                     <motion.div
                         key={idx}
                         whileHover={{ scale: 1.05 }}
-                        className="bg-white shadow-xl rounded-lg overflow-hidden"
+                        className="bg-white/70 shadow-xl rounded-lg overflow-hidden"
                     >
                         <img
                             src={item.image}

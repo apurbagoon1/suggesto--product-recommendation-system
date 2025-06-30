@@ -13,6 +13,7 @@ import MyRecommendation from "../Pages/MyRecommendation";
 import RecommendationsForMe from "../Pages/RecommendationsForMe";
 import Error from "../Pages/Error";
 import About from "../Pages/About";
+import BlogDetails from "../Pages/BlogDetails";
 
 const router = createBrowserRouter([
     {
@@ -23,16 +24,21 @@ const router = createBrowserRouter([
             {
                 index: true,
                 loader: () => fetch('https://suggesto-product-reco-server.vercel.app/queries'),
-                Component: Home
+                element: <Home></Home>
             },
             {
                 path: '/about',
-                Component: About
+                element: <About></About>
 
             },
             {
                 path: '/allQueries',
-                Component: AllQueries
+                element: <AllQueries></AllQueries>
+
+            },
+            {   
+                path: '/blog/:id',
+                element: <BlogDetails></BlogDetails>
 
             },
             {

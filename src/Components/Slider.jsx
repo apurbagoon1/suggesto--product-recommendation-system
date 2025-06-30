@@ -69,7 +69,7 @@ const Slider = () => {
           >
             <div className="absolute inset-0 bg-black/30 z-10" />
 
-            <div className="relative z-20 flex flex-col md:flex-row items-center justify-between h-full px-6 md:px-24 lg:pt-20 gap-6">
+            <div className="relative z-20 flex flex-col md:flex-row items-center justify-between h-full px-6 md:px-24 lg:pt-16 gap-6">
               <div className="text-center md:text-left text-white max-w-2xl space-y-3 md:space-y-6 lg:ml-4 mt-28 md:mt-0">
                 <h1 className="text-4xl md:text-6xl font-extrabold bg-gradient-to-r from-yellow-400 to-red-500 bg-clip-text text-transparent">
                   {slide.title}

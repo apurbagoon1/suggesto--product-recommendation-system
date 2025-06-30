@@ -41,7 +41,6 @@ const About = () => {
               <li><span className="text-orange-500 font-semibold">Browse Others' Queries:</span> Discover new products and perspectives.</li>
               <li><span className="text-orange-500 font-semibold">Submit Recommendations:</span> Share your best product suggestions.</li>
               <li><span className="text-orange-500 font-semibold">Manage Your Recommendations:</span> Update or remove them anytime.</li>
-              <li><span className="text-orange-500 font-semibold">Comment Control:</span> Add, edit, or delete your comments.</li>
             </ul>
           </div>
 
@@ -54,15 +53,6 @@ const About = () => {
               To create a reliable community-driven platform where product decisions are made based on honest recommendations — not paid reviews or ads.
             </p>
           </div>
-
-        </div>
-
-        {/* Back to home */}
-        <div className="text-center text-lg font-semibold mt-16">
-          <a href="/" className="inline-flex items-center text-orange-500 hover:underline">
-            <FaArrowLeft className="mr-2" />
-            Back to Home
-          </a>
         </div>
       </div>
     </div>

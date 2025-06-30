@@ -4,6 +4,9 @@ import { useLoaderData, useNavigate } from 'react-router';
 import Query from './Query';
 import WhyBoycott from '../Components/WhyBoycott';
 import TrustedAlternatives from '../Components/TrustedAlternatives';
+import PromoSection from '../Components/PromoSection';
+import BlogSection from '../Components/BlogSection';
+import NewsletterSection from '../Components/NewsletterSection';
 
 const Home = () => {
     const queries = useLoaderData();
@@ -27,13 +30,16 @@ const Home = () => {
                 </div>
                 <button
                     onClick={() => navigate('/allQueries')}
-                    className="mt-12 px-6 py-3 text-sm md:text-base hover:bg-gradient-to-bl from-yellow-500 to-orange-500 hover:text-white uppercase tracking-wider font-bold rounded-full hover:scale-105 transition-transform cursor-pointer"
+                    className="mt-12 px-5 py-2.5 text-sm md:text-base hover:bg-gradient-to-bl from-yellow-500 to-orange-500 hover:text-white uppercase tracking-wider font-bold rounded-lg hover:scale-105 transition-transform cursor-pointer"
                 >
                     View All Queries
                 </button>
             </div>
             <WhyBoycott></WhyBoycott>
             <TrustedAlternatives></TrustedAlternatives>
+            <PromoSection></PromoSection>
+            <BlogSection></BlogSection>
+            <NewsletterSection></NewsletterSection>
         </div>
     );
 };
