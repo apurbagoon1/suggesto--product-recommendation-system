@@ -25,8 +25,6 @@ const Navbar = () => {
     const location = useLocation();
     const currentPath = location.pathname;
 
-
-
     useEffect(() => {
         const handleScroll = () => {
             if (window.scrollY > 50) {
@@ -54,7 +52,7 @@ const Navbar = () => {
                         <img src={logo} alt="Logo" className="h-10 md:h-12 lg:h-14" />
                         <div className="">
                             <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-orange-500 tracking-wider mb-1 logo-text">Suggesto</h1>
-                            <p className="text-xs lg:text-sm font-extralight tracking-wider opacity-65">PRODUCT RECO. SYSTEM</p>
+                            <p className="text-xs text-gray-300 tracking-wider opacity-65">PRODUCT RECO. SYSTEM</p>
                         </div>
                     </Link>
 
@@ -123,14 +121,14 @@ const Navbar = () => {
                         {user ? (
                             <button
                                 onClick={() => setShowProfileModal(true)}
-                                className="border-2 border-orange-500 px-4 py-1.5 rounded-lg cursor-pointer uppercase tracking-wide font-medium hover:bg-gradient-to-tr from-yellow-600 to-orange-700 text-white"
+                                className="border-2 border-orange-500 px-4 py-1.5 rounded-lg cursor-pointer uppercase tracking-wide font-medium hover:bg-gradient-to-tr from-yellow-600 to-orange-700 text-orange-500 hover:text-white"
                                 title={`Click to see ${user.displayName}'s profile`}
                             >
                                 Profile
                             </button>
                         ) : (
                             <div className="hidden lg:block">
-                                <button onClick={() => setShowAuthModal(true)} className="border-2 border-orange-500 px-4 py-1.5 rounded-lg cursor-pointer uppercase tracking-wide font-medium hover:bg-gradient-to-tr from-yellow-600 to-orange-700">
+                                <button onClick={() => setShowAuthModal(true)} className="border-2 border-orange-500 text-orange-500 px-4 py-1.5 rounded-lg cursor-pointer uppercase tracking-wide font-medium hover:bg-gradient-to-tr from-yellow-600 to-orange-700 hover:text-white">
                                     Log In
                                 </button>
                             </div>
@@ -154,8 +152,8 @@ const Navbar = () => {
                     <Link to="/" className="text-center mx-auto space-y-2 mt-8">
                         <img src={logo} alt="Logo" className="h-12 mx-auto" />
                         <div>
-                            <h1 className="text-xl tracking-wider mb-2 logo-text">Suggesto</h1>
-                            <p className="text-xs text-orange-500 font-extralight tracking-wider">PRODUCT RECOMMENDATION</p>
+                            <h1 className="text-xl text-orange-500 tracking-wider mb-2 logo-text">Suggesto</h1>
+                            <p className="text-xs text-gray-300 font-light tracking-wider">PRODUCT RECOMMENDATION</p>
                         </div>
                     </Link>
                 </div>
@@ -164,29 +162,25 @@ const Navbar = () => {
                     <div className="flex justify-center mb-4">
                         <button
                             onClick={() => setShowProfileModal(true)}
-                            className="border-2 border-orange-500 px-4 py-1.5 rounded-lg cursor-pointer  tracking-wider font-medium hover:bg-gradient-to-tr from-yellow-600 to-orange-700 text-white"
+                            className="border-2 border-orange-500 px-4 py-1.5 rounded-lg cursor-pointer  tracking-wider hover:bg-gradient-to-tr from-yellow-600 to-orange-700 text-white"
                             title={`Click to see ${user.displayName}'s profile`}
                         >
                             Profile
                         </button>
                     </div>
                 ) : (
-                    <div
-                        className="flex justify-center gap-2 text-orange-500 font-medium mb-4 tracking-wide cursor-pointer"
-                        onClick={() => setShowAuthModal(true)}
-                    >
-                        <span>Log In</span><span>|</span><span>Sign Up</span>
+                    <div className='flex justify-center mb-4'>
+                        <button
+                            className="border-2 border-orange-500 px-4 py-1.5 rounded-lg cursor-pointer  tracking-wider hover:bg-gradient-to-tr from-yellow-600 to-orange-700 text-white"
+                            onClick={() => setShowAuthModal(true)}
+                        >
+                            Log In
+                        </button>
                     </div>
                 )}
 
                 <div className="px-4">
-                    <div className="relative mb-4">
-                        <input
-                            type="text"
-                            placeholder="Search"
-                            className="w-full p-2 pl-3 rounded bg-gray-800 text-white"
-                        />
-                        <Search className="absolute top-2.5 right-3 text-orange-500" size={18} />
+                    <div className="border border-orange-500/70 mt-6 mb-4">
                     </div>
 
                     <ul className="space-y-2 mt-4 text-left pl-2">

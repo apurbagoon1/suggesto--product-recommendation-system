@@ -28,12 +28,12 @@ const TrustedAlternatives = () => {
             <p className="md:text-xl mb-10 tracking-wider text-center">
                 Discover ethical and community-recommended alternatives to boycotted products.
             </p>
-            <div className="grid md:grid-cols-3 gap-10">
+            <div className="grid md:grid-cols-3 gap-8">
                 {alternatives.map((item, idx) => (
                     <motion.div
                         key={idx}
                         whileHover={{ scale: 1.05 }}
-                        className="bg-white shadow-xl rounded-xl overflow-hidden"
+                        className="bg-white shadow-xl rounded-lg overflow-hidden"
                     >
                         <img
                             src={item.image}
@@ -41,7 +41,7 @@ const TrustedAlternatives = () => {
                             className="w-full h-56 object-cover"
                         />
                         <div className="p-6">
-                            <h3 className="text-xl font-semibold text-orange-400">{item.name}</h3>
+                            <h3 className="text-xl font-semibold text-orange-500/80">{item.name}</h3>
                             <p className="mt-2 text-gray-700">{item.reason}</p>
                         </div>
                     </motion.div>

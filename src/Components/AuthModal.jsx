@@ -144,11 +144,11 @@ const AuthModal = ({ isOpen, onClose }) => {
             <div className="bg-white rounded-lg shadow-2xl w-full md:max-w-6xl overflow-hidden relative flex flex-col sm:flex-row">
                 <div className="w-full relative sm:w-2/3 h-52 sm:h-auto bg-orange-200 hidden sm:flex flex-col items-center justify-center">
                     <Lottie animationData={animationData} loop={true} className="w-full max-w-md" />
-                    <div className='absolute inset-0 flex flex-col justify-center items-center text-white pointer-events-none'>
-                        <img src={logo} alt="Logo" className="h-12 md:h-14 lg:h-16" />
-                        <div className="text-white space-y-2 text-center">
-                            <h1 className="text-2xl md:text-3xl tracking-widest text-orange-500 logo-text">Suggesto</h1>
-                            <p className="text-xs md:text-sm font-extralight tracking-widest">PRODUCT RECO. SYSTEM</p>
+                    <div className='absolute inset-0 flex px-1 py-2 pointer-events-none'>
+                        <img src={logo} alt="Logo" className="h-13" />
+                        <div className="mt-1">
+                            <h1 className="text-2xl tracking-widest text-orange-500 logo-text">Suggesto</h1>
+                            <p className="text-xs text-gray-500 tracking-wider">PRODUCT RECO. SYSTEM</p>
                         </div>
                     </div>
                 </div>

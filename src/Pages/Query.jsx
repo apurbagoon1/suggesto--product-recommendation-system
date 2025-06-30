@@ -23,16 +23,16 @@ const Query = ({ query }) => {
             <div className="p-4 space-y-2">
 
                 <div className="flex justify-between text-sm text-gray-800 gap-2">
-                    <span className="inline-flex items-center gap-1 bg-yellow-100 capitalize text-yellow-500 px-2 py-1 rounded-full">
+                    <span className="inline-flex items-center gap-1 bg-yellow-200/50 capitalize text-yellow-600 px-3 py-1 rounded-full">
                         {ProductName}
                     </span>
-                    <span className="inline-flex items-center gap-1 bg-orange-100 text-orange-500 px-3 py-1 rounded-full">
+                    <span className="inline-flex items-center gap-1 bg-orange-200/50 text-orange-600 px-3 py-1 rounded-full">
                         {ProductBrand}
                     </span>
                 </div>
 
-                <h2 className="text-xl font-semibold mt-4 text-orange-400">
-                    {QueryTitle.split(' ').slice(0, 5).join(' ')}...
+                <h2 className="text-xl font-semibold mt-4 text-orange-500/80">
+                    {QueryTitle}
                 </h2>
 
                 <div className="text-sm text-gray-500 flex items-center justify-center gap-2">

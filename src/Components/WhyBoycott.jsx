@@ -18,7 +18,7 @@ const WhyBoycott = () => {
   return (
     <section className="py-8 md:py-12 lg:py-16 px-4 bg-gradient-to-r from-orange-400 to-orange-400 via-orange-300">
       <div className="max-w-6xl mx-auto text-center">
-        <h2 className="text-2xl md:text-4xl font-bold text-red-500 mb-4 pacifico-regular tracking-wide">Why Boycott Matters!</h2>
+        <h2 className="text-2xl md:text-4xl font-bold text-orange-600 mb-4 pacifico-regular tracking-wide">Why Boycott Matters!</h2>
         <p className="md:text-xl mb-8 tracking-wider">Hover to Learn how your choices can drive ethical change in industries worldwide.</p>
 
         <div className="relative overflow-visible">
@@ -39,8 +39,8 @@ const WhyBoycott = () => {
               delay: 4000,
               disableOnInteraction: false,
             }}
-            spaceBetween={30}
-            slidesPerView={3}
+            spaceBetween={16}
+            slidesPerView={4}
             centeredSlides={true}
             loop={true}
             className="overflow-visible"
@@ -53,7 +53,7 @@ const WhyBoycott = () => {
             {boycott.map((boycott, index) => (
               <SwiperSlide key={index} className="pt-4 mb-10">
                 <div
-                  className="bg-white p-4 rounded shadow hover:shadow-md transition"
+                  className="bg-white p-2 pb-4 rounded shadow hover:shadow-md transition"
                   data-tooltip-id="boycott-tip"
                   data-tooltip-content={boycott.tooltip}
                 >
