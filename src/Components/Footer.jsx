@@ -34,7 +34,7 @@ const Footer = () => {
                     <div className="space-y-2">
                         <NavLink to="/" className="block hover:text-orange-500 transition">Home</NavLink>
                         <NavLink to="/about" className="block hover:text-orange-500 transition">About</NavLink>
-                        <NavLink to="/queries" className="block hover:text-orange-500 transition">Queries</NavLink>
+                        <NavLink to="/allQueries" className="block hover:text-orange-500 transition">Queries</NavLink>
                     </div>
                 </div>
 

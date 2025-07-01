@@ -10,10 +10,11 @@ const AllQueries = () => {
     const [loading, setLoading] = useState(true);
     const [isGridView, setIsGridView] = useState(true);
     const [searchText, setSearchText] = useState('');
-    const [sortByName, setSortByName] = useState(null); 
+    const [sortByName, setSortByName] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
+        document.title = 'Suggesto | All Queries';
         const fetchQueries = async () => {
             try {
                 const res = await fetch('https://suggesto-product-reco-server.vercel.app/queries');
@@ -58,7 +59,7 @@ const AllQueries = () => {
     const handleSortToggle = () => {
         if (sortByName === null) setSortByName('asc');
         else if (sortByName === 'asc') setSortByName('desc');
-        else setSortByName(null); 
+        else setSortByName(null);
     };
 
     const filteredQueries = queries.filter(query =>
@@ -71,7 +72,7 @@ const AllQueries = () => {
         } else if (sortByName === 'desc') {
             return b.ProductName.localeCompare(a.ProductName);
         } else {
-            return new Date(b.date) - new Date(a.date); 
+            return new Date(b.date) - new Date(a.date);
         }
     });
 

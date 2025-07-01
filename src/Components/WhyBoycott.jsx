@@ -39,8 +39,8 @@ const WhyBoycott = () => {
               delay: 4000,
               disableOnInteraction: false,
             }}
-            spaceBetween={16}
-            slidesPerView={4}
+            spaceBetween={18}
+            slidesPerView={3}
             centeredSlides={true}
             loop={true}
             className="overflow-visible"

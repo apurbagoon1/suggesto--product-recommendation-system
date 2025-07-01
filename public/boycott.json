@@ -23,5 +23,15 @@
     "name": "Product Justice",
     "image": "https://i.ibb.co/2YysHcFp/boycott-5.jpg",
     "tooltip": "Expose and discuss products that violate ethics, sustainability, or fairness."
+  },
+  {
+    "name": "Ethical Influence",
+    "image": "https://i.ibb.co/jmYh0C1/9350.jpg",
+    "tooltip": "Encourage ethical buying habits by sharing impactful stories and reports."
+  },
+  {
+    "name": "Collective Action",
+    "image": "https://i.ibb.co/qYjv641m/2148729688.jpg",
+    "tooltip": "Unite communities to challenge harmful products and advocate for responsible practices."
   }
 ]

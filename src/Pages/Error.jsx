@@ -1,9 +1,12 @@
-import React from 'react';
-import { Link } from 'react-router'; 
+import React, { useEffect } from 'react';
+import { Link } from 'react-router';
 import { FaArrowLeft } from 'react-icons/fa';
 import errorImage from '../assets/Error-page.jpg';
 
 const Error = () => {
+    useEffect(() => {
+        document.title = 'Suggesto | 404 Error';
+    }, []);
 
     return (
         <div className="min-h-screen flex items-center justify-center px-4 bg-white">

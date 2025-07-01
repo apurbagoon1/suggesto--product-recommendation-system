@@ -20,6 +20,7 @@ const QueryDetails = () => {
     const { user } = useContext(AuthContext);
 
     useEffect(() => {
+        document.title = 'Suggesto | Query Details';
         const fetchQuery = async () => {
             try {
                 const res = await fetch(`https://suggesto-product-reco-server.vercel.app/queries`);
@@ -135,7 +136,7 @@ const QueryDetails = () => {
                                 <button
                                     className="bg-gradient-to-r from-yellow-500 to-orange-600 text-white py-2 px-8 text-sm md:text-base rounded-full shadow-lg hover:scale-105 transition-transform cursor-pointer font-semibold tracking-wide mt-2"
                                 >
-                                    Back to All Queries
+                                  ← Back to All Queries
                                 </button>
                             </Link>
                         </div>

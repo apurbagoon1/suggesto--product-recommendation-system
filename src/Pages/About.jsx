@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FaQuestionCircle, FaRegLightbulb, FaCogs, FaUsers, FaArrowLeft } from 'react-icons/fa';
 import Cover from '../Components/Cover';
 
 const About = () => {
+  useEffect(() => {
+    document.title = 'Suggesto | About';
+  }, []);
+
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100">
-      
+
       <Cover
         title="Share Your Thoughts"
         highlighted="ADD QUERY"

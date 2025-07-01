@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Slider from '../Components/Slider';
 import { useLoaderData, useNavigate } from 'react-router';
 import Query from './Query';
@@ -9,6 +9,10 @@ import BlogSection from '../Components/BlogSection';
 import NewsletterSection from '../Components/NewsletterSection';
 
 const Home = () => {
+    useEffect(() => {
+        document.title = 'Suggesto | Home';
+    }, []);
+
     const queries = useLoaderData();
     const navigate = useNavigate();
     const recentQueries = queries.slice(-6).reverse();
@@ -16,7 +20,7 @@ const Home = () => {
         <div>
             <Slider></Slider>
             <div className="max-w-7xl mx-auto px-4 py-10 md:py-12 lg:py-16 text-center">
-                <h1 className="text-2xl md:text-4xl tracking-wider font-bold text-orange-500 mb-4">
+                <h1 className="text-2xl md:text-4xl tracking-wide font-bold text-orange-500 mb-4">
                     Explore Recent Queries
                 </h1>
                 <p className="md:text-xl mb-10 tracking-wide">

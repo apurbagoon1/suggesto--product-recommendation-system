@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaSpinner } from "react-icons/fa";
 
 const Loading = () => {
+  useEffect(() => {
+    document.title = 'Suggesto | Loading...';
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-white dark:bg-gray-900 text-orange-500">
       <FaSpinner className="animate-spin text-5xl mb-4" />

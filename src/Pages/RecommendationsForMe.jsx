@@ -10,6 +10,7 @@ const RecommendationsForMe = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    document.title = 'Suggesto | Recommendations For Me';
     const fetchRecommendations = async () => {
       if (!user?.email) return;
 
@@ -84,7 +85,7 @@ const RecommendationsForMe = () => {
                 {recommendations.map((rec) => (
                   <tr
                     key={rec._id}
-                    className="border-b border-orange-300 hover:bg-orange-100 transition"
+                    className="border-b border-orange-400 hover:bg-orange-100/30 transition"
                   >
                     <td className="py-3 px-2 text-center">
                       <img

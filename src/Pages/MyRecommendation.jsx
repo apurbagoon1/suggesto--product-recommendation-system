@@ -13,6 +13,8 @@ const MyRecommendation = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        document.title = 'Suggesto | My Recommendations';
+
         if (!user?.email) return;
 
         fetch(`https://suggesto-product-reco-server.vercel.app/recommendations?email=${user.email}`, {
@@ -111,7 +113,7 @@ const MyRecommendation = () => {
                                 {myRecommendations.map((rec) => (
                                     <tr
                                         key={rec._id}
-                                        className="border-b border-orange-300 hover:bg-orange-100 transition"
+                                        className="border-b border-orange-400 hover:bg-orange-100/30 transition"
                                     >
                                         <td className="py-3 px-2 text-center">
                                             <img

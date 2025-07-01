@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import Cover from '../Components/Cover';
+import Loading from './Loading';
 
 const UpdateQuery = () => {
     const { id } = useParams();
@@ -9,6 +10,7 @@ const UpdateQuery = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        document.title = 'Suggesto | Update Query';
         fetch(`https://suggesto-product-reco-server.vercel.app/queries/${id}`, {
             credentials: 'include',
         })
@@ -44,7 +46,7 @@ const UpdateQuery = () => {
         }
     };
 
-    if (!query) return <p className="text-center mt-10 text-lg">Loading Query...</p>;
+    if (!query) return <Loading></Loading>;
 
     return (
         <div>
@@ -67,13 +69,13 @@ const UpdateQuery = () => {
                             name="BoycottReason"
                             defaultValue={query.BoycottReason}
                             rows="5"
-                            className="p-4 bg-gray-800/50 w-full rounded-md outline-none"
+                            className="p-4 bg-gray-600/50 w-full rounded-md outline-none"
                         />
                     </div>
                     <div className="flex justify-center mt-6">
                         <button
                             type="submit"
-                            className="bg-gradient-to-r from-yellow-500 to-orange-600 text-white py-3 px-8 text-sm md:text-base rounded-full shadow-lg hover:scale-105 transition-transform cursor-pointer font-semibold tracking-wide"
+                            className="bg-gradient-to-r from-yellow-500 to-orange-600 text-white py-3 px-8 text-sm md:text-base rounded-lg shadow-lg hover:scale-105 transition-transform cursor-pointer font-semibold tracking-wide"
                         >
                             UPDATE QUERY
                         </button>
@@ -91,7 +93,7 @@ const Input = ({ name, label, value }) => (
             type="text"
             name={name}
             defaultValue={value}
-            className="p-4 bg-gray-800/50 w-full rounded-md outline-none"
+            className="p-4 bg-gray-600/50 w-full rounded-md outline-none"
             required
         />
     </div>

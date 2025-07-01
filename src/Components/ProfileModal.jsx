@@ -102,14 +102,14 @@ const ProfileModal = ({ isOpen, onClose }) => {
                     {editMode ? (
                         <button
                             onClick={handleUpdateProfile}
-                            className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 cursor-pointer rounded-xl font-semibold"
+                            className="border border-white text-white hover:scale-105 hover:bg-white hover:text-orange-500 px-6 py-2 cursor-pointer rounded-lg"
                         >
                             Update Profile
                         </button>
                     ) : (
                         <button
                             onClick={() => setEditMode(true)}
-                            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 cursor-pointer rounded-xl font-semibold"
+                            className="border border-white text-white hover:scale-105 hover:bg-white hover:text-orange-500 px-6 py-2 cursor-pointer rounded-lg"
                         >
                             Edit Profile
                         </button>
@@ -117,7 +117,7 @@ const ProfileModal = ({ isOpen, onClose }) => {
                     <span className="text-white">..OR..</span>
                     <button
                         onClick={handleLogout}
-                        className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 cursor-pointer rounded-xl font-semibold"
+                        className="border border-white text-white hover:scale-105 hover:bg-white hover:text-orange-500 px-6 py-2 cursor-pointer rounded-lg"
                     >
                         Log Out
                     </button>

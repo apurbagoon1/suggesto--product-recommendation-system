@@ -10,6 +10,7 @@ const AddQuery = () => {
     const [photoURL, setphotoURL] = useState('');
 
     useEffect(() => {
+        document.title = 'Suggesto | Add Query';
         if (user) {
             setEmail(user.email || '');
             setUserName(user.displayName || '');
@@ -88,13 +89,13 @@ const AddQuery = () => {
                             name="BoycottReason"
                             placeholder="the reason you don’t want this product"
                             rows="5"
-                            className="p-4 bg-gray-800/50 w-full rounded-md outline-none"
+                            className="p-4 bg-gray-600/50 w-full rounded-md outline-none"
                         />
                     </div>
                     <div className="flex justify-center mt-6">
                         <button
                             type="submit"
-                            className="bg-gradient-to-r from-yellow-500 to-orange-600 text-white py-3 px-8 text-sm md:text-base rounded-full shadow-lg hover:scale-105 transition-transform cursor-pointer font-semibold tracking-wide"
+                            className="bg-gradient-to-r from-yellow-500 to-orange-600 text-white py-3 px-8 text-sm md:text-base rounded-lg shadow-lg hover:scale-105 transition-transform cursor-pointer font-semibold tracking-wide"
                         >
                             ADD QUERY
                         </button>
@@ -114,7 +115,7 @@ const Input = ({ name, label, type = "text", placeholder, value, readOnly = fals
             placeholder={placeholder}
             defaultValue={value}
             readOnly={readOnly}
-            className="p-4 bg-gray-800/50 w-full rounded-md outline-none"
+            className="p-4 bg-gray-600/50 w-full rounded-md"
         />
     </div>
 );
@@ -125,7 +126,7 @@ const Select = ({ name, label, options }) => (
         <select
             name={name}
             defaultValue=""
-            className="p-4 bg-gray-800/50 w-full rounded-md outline-none"
+            className="p-4 bg-gray-600/50 w-full rounded-md outline-none"
         >
             <option value="">Select {label}</option>
             {options.map(option => (

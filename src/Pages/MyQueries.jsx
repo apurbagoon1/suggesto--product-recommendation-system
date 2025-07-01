@@ -23,6 +23,7 @@ const MyQueries = () => {
     };
 
     useEffect(() => {
+        document.title = 'Suggesto | My Queries';
         const fetchUserQueries = async () => {
             try {
                 const res = await fetch(`https://suggesto-product-reco-server.vercel.app/queries`, {
