@@ -69,7 +69,7 @@ const RecommendationsForMe = () => {
           </div>
         ) : (
           <div className="overflow-x-auto rounded shadow my-8">
-            <table className="min-w-full border border-orange-500 text-sm">
+            <table className="min-w-full border border-orange-400 text-sm">
               <thead className="bg-orange-500 text-white">
                 <tr>
                   <th className="py-3 px-4">Image</th>
@@ -84,13 +84,13 @@ const RecommendationsForMe = () => {
                 {recommendations.map((rec) => (
                   <tr
                     key={rec._id}
-                    className="border-b border-orange-500 hover:bg-gray-600 transition"
+                    className="border-b border-orange-300 hover:bg-orange-100 transition"
                   >
                     <td className="py-3 px-2 text-center">
                       <img
                         src={rec.image}
                         alt={rec.name}
-                        className="w-24 h-20 object-cover rounded mx-auto"
+                        className="w-18 h-14 md:w-24 md:h-20 object-cover rounded mx-auto"
                       />
                     </td>
                     <td className="py-3 px-2 font-medium">{rec.title}</td>

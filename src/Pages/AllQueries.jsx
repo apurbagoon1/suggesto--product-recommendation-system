@@ -80,7 +80,7 @@ const AllQueries = () => {
     return (
         <div>
             <Cover title="Explore Others' Thoughts" highlighted="ALL QUERIES" current="All Queries" />
-            <div className="max-w-7xl mx-auto px-4 py-10">
+            <div className="max-w-7xl mx-auto px-4 py-6 md:pt-10 md:pb-14">
                 {/* Top Controls */}
                 <div className="flex justify-between items-center mb-8 gap-6 flex-wrap">
                     <input
@@ -94,19 +94,19 @@ const AllQueries = () => {
                     <div className="flex gap-3">
                         <button
                             onClick={() => setIsGridView(true)}
-                            className={`px-3 py-2 rounded ${isGridView ? 'bg-gradient-to-tr from-yellow-500 to-orange-600 text-white' : 'bg-gray-200 text-black'}`}
+                            className={`hidden sm:block px-3 py-2 rounded ${isGridView ? 'bg-gradient-to-tr from-yellow-500 to-orange-600 text-white' : 'bg-gray-200 text-black'}`}
                         >
                             <FaThLarge size={20} />
                         </button>
                         <button
                             onClick={() => setIsGridView(false)}
-                            className={`px-3 py-2 rounded ${!isGridView ? 'bg-gradient-to-tr from-yellow-500 to-orange-600 text-white' : 'bg-gray-200 text-black'}`}
+                            className={`hidden sm:block px-3 py-2 rounded ${!isGridView ? 'bg-gradient-to-tr from-yellow-500 to-orange-600 text-white' : 'bg-gray-200 text-black'}`}
                         >
                             <FaList size={20} />
                         </button>
                         <button
                             onClick={handleSortToggle}
-                            className="px-3 py-2 rounded bg-orange-200 hover:bg-orange-300 text-orange-600 font-semibold cursor-pointer"
+                            className="px-3 py-2 rounded bg-gradient-to-bl from-yellow-500 to-orange-600 hover:bg-orange-300 text-white font-semibold cursor-pointer"
                         >
                             {sortByName === 'asc' && 'Product Name (A → Z)'}
                             {sortByName === 'desc' && 'Product Name (Z → A)'}
@@ -120,7 +120,7 @@ const AllQueries = () => {
                     {sortedQueries.map((query) => (
                         <div
                             key={query._id}
-                            className={`bg-white shadow rounded-lg p-5 transition hover:shadow-lg ${isGridView ? 'flex flex-col h-full' : 'flex flex-row gap-5 items-center'
+                            className={`bg-white shadow-lg rounded-lg p-5 transition hover:shadow-xl hover:scale-[1.02] ${isGridView ? 'flex flex-col h-full' : 'flex flex-row gap-5 items-center'
                                 }`}
                         >
                             <img
