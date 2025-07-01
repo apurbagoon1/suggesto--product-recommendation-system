@@ -9,16 +9,17 @@ const AllQueries = () => {
     const [queries, setQueries] = useState([]);
     const [loading, setLoading] = useState(true);
     const [isGridView, setIsGridView] = useState(true);
-    const navigate = useNavigate();
     const [searchText, setSearchText] = useState('');
+    const [sortByName, setSortByName] = useState(null); 
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchQueries = async () => {
             try {
                 const res = await fetch('https://suggesto-product-reco-server.vercel.app/queries');
                 const data = await res.json();
-                const sorted = data.sort((a, b) => new Date(b.date) - new Date(a.date));
-                setQueries(sorted);
+                const sortedByDate = data.sort((a, b) => new Date(b.date) - new Date(a.date));
+                setQueries(sortedByDate);
                 setLoading(false);
             } catch (err) {
                 console.error('Error fetching queries:', err);
@@ -27,10 +28,6 @@ const AllQueries = () => {
         };
         fetchQueries();
     }, []);
-
-    const filteredQueries = queries.filter(query =>
-        query.ProductName.toLowerCase().includes(searchText)
-    );
 
     const formatTimeAgo = (date) => {
         const now = new Date();
@@ -58,12 +55,33 @@ const AllQueries = () => {
         navigate(`/queryDetails/${id}`);
     };
 
+    const handleSortToggle = () => {
+        if (sortByName === null) setSortByName('asc');
+        else if (sortByName === 'asc') setSortByName('desc');
+        else setSortByName(null); 
+    };
+
+    const filteredQueries = queries.filter(query =>
+        query.ProductName.toLowerCase().includes(searchText)
+    );
+
+    const sortedQueries = [...filteredQueries].sort((a, b) => {
+        if (sortByName === 'asc') {
+            return a.ProductName.localeCompare(b.ProductName);
+        } else if (sortByName === 'desc') {
+            return b.ProductName.localeCompare(a.ProductName);
+        } else {
+            return new Date(b.date) - new Date(a.date); 
+        }
+    });
+
     if (loading) return <Loading />;
 
     return (
         <div>
             <Cover title="Explore Others' Thoughts" highlighted="ALL QUERIES" current="All Queries" />
             <div className="max-w-7xl mx-auto px-4 py-10">
+                {/* Top Controls */}
                 <div className="flex justify-between items-center mb-8 gap-6 flex-wrap">
                     <input
                         type="text"
@@ -76,21 +94,30 @@ const AllQueries = () => {
                     <div className="flex gap-3">
                         <button
                             onClick={() => setIsGridView(true)}
-                            className={`px-3 py-2 rounded ${isGridView ? 'bg-gradient-to-tr from-yellow-500 to-orange-600 text-white' : 'bg-gray-200 text-black cursor-pointer'}`}
+                            className={`px-3 py-2 rounded ${isGridView ? 'bg-gradient-to-tr from-yellow-500 to-orange-600 text-white' : 'bg-gray-200 text-black'}`}
                         >
                             <FaThLarge size={20} />
                         </button>
                         <button
                             onClick={() => setIsGridView(false)}
-                            className={`px-3 py-2 rounded ${!isGridView ? 'bg-gradient-to-tr from-yellow-500 to-orange-600 text-white' : 'bg-gray-200 text-black cursor-pointer'}`}
+                            className={`px-3 py-2 rounded ${!isGridView ? 'bg-gradient-to-tr from-yellow-500 to-orange-600 text-white' : 'bg-gray-200 text-black'}`}
                         >
                             <FaList size={20} />
+                        </button>
+                        <button
+                            onClick={handleSortToggle}
+                            className="px-3 py-2 rounded bg-orange-200 hover:bg-orange-300 text-orange-600 font-semibold cursor-pointer"
+                        >
+                            {sortByName === 'asc' && 'Product Name (A → Z)'}
+                            {sortByName === 'desc' && 'Product Name (Z → A)'}
+                            {sortByName === null && 'Sort by Latest (default)'}
                         </button>
                     </div>
                 </div>
 
+                {/* Display Queries */}
                 <div className={isGridView ? 'grid sm:grid-cols-2 lg:grid-cols-3 gap-8' : 'space-y-6'}>
-                    {filteredQueries.map((query) => (
+                    {sortedQueries.map((query) => (
                         <div
                             key={query._id}
                             className={`bg-white shadow rounded-lg p-5 transition hover:shadow-lg ${isGridView ? 'flex flex-col h-full' : 'flex flex-row gap-5 items-center'
