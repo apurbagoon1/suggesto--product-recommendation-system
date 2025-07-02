@@ -1,4 +1,4 @@
-# 🚀 Suggesto - Product Reco. System
+# Suggesto - Product Recommendation System
 
 **Live Site:** 🌐 [https://suggesto-product-reco.web.app/](https://suggesto-product-reco.web.app/)
 
