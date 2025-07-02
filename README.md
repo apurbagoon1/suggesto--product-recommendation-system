@@ -63,19 +63,16 @@ This project is built using **React**, **Firebase Auth**, **Express.js**, and **
 
 ### Client
 - **React**
-- **React Router DOM**
+- **React Router**
 - **Firebase Authentication**
 - **Axios**
-- **TailwindCSS + DaisyUI**
-- **Framer Motion**
-- **Lottie React**
-- **React Icons**
-- **React Tooltip**
-- **SwiperJS Carousel**
+- **TailwindCSS**
+
 
 ### Server
 - **Express.js**
 - **MongoDB**
+- **Node.js**
 - **JWT**
 - **CORS**
 - **Dotenv**
